@@ -1,4 +1,4 @@
-import http from '../../service/http'
+import api from '../../service/api'
 
 const state = {}
 const getters = {}
@@ -6,7 +6,7 @@ const mutations = {}
 
 const actions = {
   login(context, data) {
-    return http.post('auth/login', data)
+    return api.post('auth/login', data)
       .then((response) => {
         console.log(response)
       })
