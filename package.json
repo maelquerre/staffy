@@ -9,10 +9,21 @@
         "prod": "npm run production",
         "production": "mix --production"
     },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "vue": "^2.6.12",
+        "vue-router": "^3.5.1",
+        "vuex": "^3.6.2"
+    },
     "devDependencies": {
-        "axios": "^0.21",
+        "@tailwindcss/jit": "^0.1.18",
+        "autoprefixer": "^10.2.5",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.2.9",
+        "postcss-nested": "^5.0.5",
+        "tailwindcss": "^2.1.1",
+        "vue-loader": "^15.9.6",
+        "vue-template-compiler": "^2.6.12"
     }
 }

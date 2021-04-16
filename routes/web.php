@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DefaultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('', [DefaultController::class, 'app'])->name('app');
+Route::get('login', [DefaultController::class, 'app'])->name('login');
+
+Route::prefix('auth')->group(function () {
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('logout')->name('auth.logout');
 });

@@ -1,0 +1,27 @@
+.input {
+  display: block;
+  width: 100%;
+  appearance: none;
+
+  margin-bottom: theme('spacing.4');
+  padding: theme('spacing.2') theme('spacing.3');
+
+  color: theme('colors.gray.900');
+  background-color: theme('colors.white');
+  border: 1px solid theme('colors.gray.200');
+  border-radius: theme('borderRadius.md');
+  box-shadow: theme('boxShadow.sm');
+
+  &::placeholder {
+    color: theme('colors.gray.400');
+  }
+
+  &:focus {
+    border-color: theme('colors.blue.500');
+    outline: none;
+  }
+
+  @screen sm {
+    font-size: theme('fontSize.sm')
+  }
+}
