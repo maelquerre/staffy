@@ -77,6 +77,7 @@ class EditArea {
     })
 
     this.editor.focus()
+    this.editor.revealLine(startPosition.lineNumber)
   }
 
   getString() {
