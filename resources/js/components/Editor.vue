@@ -1,8 +1,9 @@
 <template>
   <MonacoEditor
     ref="editor"
-    v-model="code"
     :options="monacoOptions"
+    :value="value"
+    @change="$emit('change', $event)"
     @editorDidMount="initEditor"
   />
 </template>
@@ -18,16 +19,21 @@ export default {
     MonacoEditor,
   },
 
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+
   props: {
     canvasId: {
       type: String,
       required: true,
     },
 
-    code: {
+    value: {
       type: String,
       required: true,
-    }
+    },
   },
 
   data() {

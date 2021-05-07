@@ -5,7 +5,8 @@
         <Editor
           class="absolute inset-0"
           canvasId="preview"
-          :code="score.content"
+          :value="scoreContent"
+          @change="scoreContent = $event"
         />
       </div>
 
@@ -30,8 +31,16 @@ export default {
   },
 
   data() {
+    const scoreContent = score.content
+
     return {
-      score,
+      scoreContent,
+    }
+  },
+
+  methods: {
+    handle(event) {
+      console.log(event)
     }
   }
 }

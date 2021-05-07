@@ -18,9 +18,9 @@ class EditArea {
   addChangeListener(listener) {
     this.changelistener = listener
 
-    // this.editor.onKeyUp(() => {
-    //   listener.fireChanged()
-    // })
+    this.editor.onKeyUp(() => {
+      listener.fireChanged()
+    })
 
     this.editor.onMouseDown(() => {
       this.isDragging = true
@@ -32,37 +32,27 @@ class EditArea {
       listener.fireChanged()
     })
 
-    this.model.onDidChangeContent(() => {
+    this.model.onDidChangeContent((event) => {
       listener.fireChanged()
     })
   }
 
   /**
-   * TODO: Implement this function
-   *
-   * Given startLineNumber, endLineNumber, startColumn and endColumn,
-   * retrieve a start and end position for a single string.
+   * Retrieve start and end position for a string,
+   * given startLineNumber, endLineNumber, startColumn and endColumn.
    */
   getSelection() {
     const selection = this.editor.getSelection()
-    const selectionCharacterCount = this.model.getCharacterCountInRange(selection)
 
-    let start = 0
-
-    let line = 1
-    while (line < selection.startLineNumber) {
-      start += this.model.getLineLength(line)
-      line++
-    }
-
-    start += this.model.getCharacterCountInRange({
-      startLineNumber: line,
-      endLineNumber: line,
-      startColumn: 1,
-      endColumn: selection.startColumn,
+    let start = this.model.getOffsetAt({
+      lineNumber: selection.startLineNumber,
+      column: selection.startColumn,
     })
 
-    const end = start + selectionCharacterCount
+    let end = this.model.getOffsetAt({
+      lineNumber: selection.endLineNumber,
+      column: selection.endColumn,
+    })
 
     return {
       start,
@@ -77,14 +67,17 @@ class EditArea {
    * startLineNumber, endLineNumber, startColumn and endColumn.
    */
   setSelection(start, end) {
-    //  const lineCount = this.editor.getModel().getLineCount()
-    //  editor.setSelection({
-    //  startLineNumber,
-    //  endLineNumber,
-    //  startColumn,
-    //  endColumn,
-    //  })
-    //  this.textarea.focus()
+    const startPosition = this.model.getPositionAt(start)
+    const endPosition = this.model.getPositionAt(end)
+
+    this.editor.setSelection({
+      startLineNumber: startPosition.lineNumber,
+      startColumn: startPosition.column,
+      endLineNumber: endPosition.lineNumber,
+      endColumn: endPosition.column,
+    })
+
+    this.editor.focus()
   }
 
   getString() {
