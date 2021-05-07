@@ -65,7 +65,7 @@
 
     <div>
       <button
-        class="btn btn-primary mt-6"
+        class="btn btn-default mt-6"
         @click="handleRegister"
       >
         Register

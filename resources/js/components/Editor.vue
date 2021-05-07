@@ -85,6 +85,10 @@ export default {
   },
 
   methods: {
+    computeEditorSize() {
+      this.$refs.editor.getEditor().layout()
+    },
+
     initEditor() {
       new abcjs.Editor(new EditArea(this.$refs.editor), {
         canvas_id: this.canvasId,
@@ -92,6 +96,9 @@ export default {
           responsive: 'resize',
         },
       })
+
+      this.computeEditorSize()
+      window.addEventListener('resize', this.computeEditorSize)
     },
   }
 }

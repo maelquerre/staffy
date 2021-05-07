@@ -1,11 +1,10 @@
 .btn {
   display: inline-block;
-  padding: theme('spacing.2') theme('spacing.3');
-  font-size: theme('fontSize.sm');
+  padding: theme('spacing.1') theme('spacing.3');
+  font-size: theme('fontSize.xs');
   font-weight: theme('fontWeight.medium');
   border: 1px solid transparent;
   border-radius: theme('borderRadius.md');
-  box-shadow: theme('boxShadow.sm');
 
   &:focus {
     outline: none;
@@ -16,13 +15,8 @@
 /* Buttons variants */
 
 .btn-default {
-  color: theme('colors.gray.50');
-  background-color: theme('colors.gray.800');
-  border-color: theme('colors.gray.900');
-}
-
-.btn-primary {
-  color: theme('colors.white');
-  background-color: theme('colors.blue.800');
-  border-color: theme('colors.blue.900');
+  color: theme('colors.gray.900');
+  background-color: theme('colors.gray.50');
+  border-color: theme('colors.gray.100');
+  box-shadow: theme('boxShadow.sm');
 }

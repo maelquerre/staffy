@@ -37,10 +37,36 @@ class EditArea {
     })
   }
 
+  /**
+   * TODO: Implement this function
+   *
+   * Given startLineNumber, endLineNumber, startColumn and endColumn,
+   * retrieve a start and end position for a single string.
+   */
   getSelection() {
+    const selection = this.editor.getSelection()
+    const selectionCharacterCount = this.model.getCharacterCountInRange(selection)
+
+    let start = 0
+
+    let line = 1
+    while (line < selection.startLineNumber) {
+      start += this.model.getLineLength(line)
+      line++
+    }
+
+    start += this.model.getCharacterCountInRange({
+      startLineNumber: line,
+      endLineNumber: line,
+      startColumn: 1,
+      endColumn: selection.startColumn,
+    })
+
+    const end = start + selectionCharacterCount
+
     return {
-      start: this.textarea.selectionStart,
-      end: this.textarea.selectionEnd
+      start,
+      end
     }
   }
 
