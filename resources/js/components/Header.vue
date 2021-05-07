@@ -1,6 +1,6 @@
 <template>
-  <header class="flex justify-between p-2 px-4">
-    <div class="font-semibold">
+  <header class="flex items-center justify-between py-2 px-4">
+    <div class="text-lg font-semibold">
       Staffy
     </div>
 

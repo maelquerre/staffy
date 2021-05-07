@@ -1,10 +1,11 @@
 <template>
-  <div class="h-full">
+  <div class="h-full flex flex-col">
     <Header
       v-if="isHeaderShown"
+      class="flex-shrink-0"
     />
 
-    <main class="h-full flex-auto flex flex-col items-center justify-center">
+    <main class="h-full flex flex-col">
       <RouterView />
     </main>
   </div>

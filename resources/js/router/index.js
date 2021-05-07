@@ -5,6 +5,7 @@ import store from '../store'
 
 import Auth from '../views/Auth'
 import Dashboard from '../views/Dashboard'
+import Score from '../views/Score'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,11 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     props: { isLoginShown: false },
+  },
+  {
+    path: '/score/:id',
+    name: 'score',
+    component: Score,
   },
 ]
 

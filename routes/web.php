@@ -26,4 +26,4 @@ Route::prefix('auth')->group(function () {
     Route::post('logout')->name('auth.logout');
 });
 
-// TODO: Add Route::fallback()
+Route::fallback(fn() => view('404'));
