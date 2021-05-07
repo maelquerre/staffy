@@ -38,8 +38,7 @@ class EditArea {
   }
 
   /**
-   * Retrieve start and end position for a string,
-   * given startLineNumber, endLineNumber, startColumn and endColumn.
+   * Returns the start and end offsets for the primary selection of the editor.
    */
   getSelection() {
     const selection = this.editor.getSelection()
@@ -61,10 +60,10 @@ class EditArea {
   }
 
   /**
-   * TODO: Implement this function
+   * Set the primary selection of the editor. This will remove any secondary cursors.
    *
-   * Given a start and end position for a single string, retrieve
-   * startLineNumber, endLineNumber, startColumn and endColumn.
+   * @param start The start offset for the selection
+   * @param end The end offset for the selection
    */
   setSelection(start, end) {
     const startPosition = this.model.getPositionAt(start)
