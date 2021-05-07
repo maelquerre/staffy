@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -12,8 +13,15 @@ const mix = require('laravel-mix')
  */
 
 mix.js('resources/js/app.js', 'public/js').vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('@tailwindcss/jit'),
-        require('postcss-nested'),
-        require('autoprefixer'),
-    ])
+  .postCss('resources/css/app.css', 'public/css', [
+    require('@tailwindcss/jit'),
+    require('postcss-nested'),
+    require('autoprefixer'),
+  ])
+  .webpackConfig({
+    plugins: [
+      new MonacoEditorPlugin({
+        languages: ['javascript', 'css', 'html']
+      })
+    ]
+  });

@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 
 import store from '../store'
 
-import Auth from '../views/Auth'
-import Dashboard from '../views/Dashboard'
-import Score from '../views/Score'
+import Auth from '../views/Auth.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Score from '../views/Score.vue'
 
 Vue.use(VueRouter)
 
