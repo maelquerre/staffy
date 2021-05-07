@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', [DefaultController::class, 'app'])->name('app');
 Route::get('login', [DefaultController::class, 'app'])->name('login');
+Route::get('register', [DefaultController::class, 'app'])->name('register');
+
+Route::get('score/{score}', [DefaultController::class, 'app'])->name('login');
 
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('logout')->name('auth.logout');
 });
+
+// TODO: Add Route::fallback()

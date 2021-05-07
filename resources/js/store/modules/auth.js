@@ -1,17 +1,35 @@
 import api from '../../service/api'
 
-const state = {}
-const getters = {}
-const mutations = {}
+const state = {
+  user: null,
+}
+
+const getters = {
+  isAuthenticated(state) {
+    return state.user !== null
+  }
+}
+
+const mutations = {
+  setUser(state, { user }) {
+    state.user = user
+  },
+}
 
 const actions = {
-  login(context, data) {
+  async login(context, data) {
+    await axios.get('/sanctum/csrf-cookie')
+
     return api.post('auth/login', data)
-      .then((response) => {
-        console.log(response)
+      .then(({ data }) => {
+        context.commit('setUser', { user: data.data })
       })
-      .catch((error) => {
-        console.log(error)
+  },
+
+  async register(context, data) {
+    return api.post('auth/register', data)
+      .then(({ data }) => {
+        context.commit('setUser', { user: data.data })
       })
   }
 }

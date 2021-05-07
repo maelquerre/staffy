@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,16 +12,44 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validated = $request->validate([
-            'username' => 'required|string',
+            'email'    => 'required|string',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($validated)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
+        if (Auth::attempt($validated, true)) {
+            return new UserResource(Auth::user());
         }
 
-        return response()->json(['message' => 'Unauthenticated.'])->setStatusCode(401);
+        return response()->json([
+            'message' => 'Failed to authenticate.'
+        ], 401);
+    }
+
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::create($validated);
+
+        Auth::login($user, true);
+
+        return (new UserResource(Auth::user()))
+            ->response()
+            ->setStatusCode(201);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->noContent();
     }
 }
