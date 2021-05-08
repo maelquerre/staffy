@@ -38,6 +38,19 @@
   }
 }
 
+.btn-danger {
+  color: theme('colors.red.900');
+  background-color: theme('colors.red.100');
+
+  &:hover {
+    background-color: theme('colors.red.200');
+  }
+
+  &:active {
+    background-color: theme('colors.red.300');
+  }
+}
+
 .btn-text {
   color: theme('colors.gray.900');
 

@@ -7,6 +7,10 @@ import store from './store'
 
 import App from './App.vue'
 
+import { date } from './core/filters'
+
+Vue.filter('date', date)
+
 new Vue({
   router,
   store,

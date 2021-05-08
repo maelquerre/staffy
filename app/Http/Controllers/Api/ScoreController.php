@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Auth;
 class ScoreController extends Controller
 {
     /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        $user = Auth::user();
+
+        return ScoreResource::collection($user->scores);
+    }
+
+    /**
      * @param  Score  $score
      * @return ScoreResource
      */
@@ -20,6 +30,11 @@ class ScoreController extends Controller
         return new ScoreResource($score);
     }
 
+    /**
+     * @param  Request  $request
+     * @param  Authenticatable  $user
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function store(Request $request, Authenticatable $user)
     {
         $validated = $request->validate([
@@ -32,19 +47,26 @@ class ScoreController extends Controller
         $score->user_id = $user->id;
         $score->save();
 
-        return (new ScoreResource($score))
+        return ($this->show($score))
             ->response()
             ->setStatusCode(201);
     }
 
     /**
      * @param  Request  $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @param  Score  $score
+     * @return ScoreResource
      */
-    public function index(Request $request)
+    public function update(Request $request, Score $score)
     {
-        $user = Auth::user();
+        $validated = $request->validate([
+            'title'   => 'string',
+            'content' => 'string',
+        ]);
 
-        return ScoreResource::collection($user->scores);
+        $score->fill($validated);
+        $score->save();
+
+        return $this->show($score);
     }
 }

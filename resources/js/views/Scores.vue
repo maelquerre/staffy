@@ -15,6 +15,7 @@
 
       <button
         class="btn btn-default flex items-center mt-4"
+        @click="createScore"
       >
         <PlusIcon
           class="mr-1"
@@ -24,19 +25,84 @@
       </button>
     </div>
   </div>
+
+  <div
+    v-else
+    class="flex-grow p-8"
+  >
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+      <RouterLink
+        v-for="score in scores"
+        class="group flex items-start justify-between p-2 text-sm bg-white border border-gray-200 rounded-md hover:bg-gray-100"
+        :to="{ name: 'score', params: { hash: score.hash } }"
+      >
+        <div>
+          <div class="font-medium">{{ score.title }}</div>
+          <div class="mt-1 text-xs text-gray-400">Created {{ score.created_at | date }}</div>
+        </div>
+
+        <div class="flex space-x-2 opacity-0 group-hover:opacity-100">
+          <button
+            class="btn btn-primary p-1"
+            @click.prevent
+          >
+            <Edit2Icon
+              size="14"
+            />
+          </button>
+
+          <button
+            class="btn btn-danger p-1"
+            @click.prevent="handleDeleteScore(score.id)"
+          >
+            <Trash2Icon
+              size="14"
+            />
+          </button>
+        </div>
+      </RouterLink>
+    </div>
+  </div>
 </template>
 
 <script>
-import { PlusIcon } from 'vue-feather-icons'
+import { mapActions, mapState } from 'vuex'
+
+import { Edit2Icon, PlusIcon, Trash2Icon } from 'vue-feather-icons'
+
+import withScoreActions from '../mixins/withScoreActions'
 
 export default {
   components: {
+    Edit2Icon,
     PlusIcon,
+    Trash2Icon,
   },
 
-  data() {
-    return {
-      scores: []
+  mixins: [
+    withScoreActions,
+  ],
+
+  computed: {
+    ...mapState({
+      scores: state => state.score.scores,
+    }),
+  },
+
+  created() {
+    this.fetchScores()
+      .catch((response) => {
+        console.log(response)
+      })
+  },
+
+  methods: {
+    ...mapActions({
+      fetchScores: 'score/fetchScores',
+    }),
+
+    handleDeleteScore(scoreId) {
+
     }
   }
 }

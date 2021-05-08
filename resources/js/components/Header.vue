@@ -9,7 +9,7 @@
 
       <button
         class="btn btn-text p-1"
-        @click="handleCreateScore"
+        @click="createScore"
       >
         <PlusIcon
           size="18"
@@ -17,9 +17,13 @@
       </button>
     </div>
 
-    <div class="w-1/3 flex justify-center font-semibold">
-      <template v-if="score">
+    <div class="w-1/3 flex justify-center text-sm font-medium">
+      <template v-if="$route.name === 'score' && score">
         {{ score.title }}
+      </template>
+
+      <template v-else-if="$route.name === 'scores'">
+        Recent scores
       </template>
 
       <template v-else>
@@ -77,12 +81,18 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 
 import { MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
 
+import withScoreActions from '../mixins/withScoreActions'
+
 export default {
   components: {
     MenuIcon,
     PlusIcon,
     SaveIcon,
   },
+
+  mixins: [
+    withScoreActions,
+  ],
 
   computed: {
     ...mapState({
@@ -98,19 +108,7 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
-      createScore: 'score/createScore',
     }),
-
-    handleCreateScore() {
-      this.createScore().then(() => {
-        this.$router.push({
-          name: 'score',
-          params: {
-            hash: this.score.hash
-          }
-        })
-      })
-    },
 
     handleLogout() {
       this.logout().then(() => {

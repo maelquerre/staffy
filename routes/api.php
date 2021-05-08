@@ -23,6 +23,7 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('api.auth.logout');
 });
 
+Route::get('scores', [ScoreController::class, 'index'])->name('api.scores.index');
 Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
 
 Route::prefix('scores/{score:hash}')->group(function () {
