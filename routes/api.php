@@ -25,7 +25,7 @@ Route::prefix('auth')->group(function () {
 
 Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
 
-Route::prefix('scores/{score}')->group(function () {
+Route::prefix('scores/{score:hash}')->group(function () {
     Route::get('', [ScoreController::class, 'show'])->name('api.scores.show');
 });
 

@@ -18,7 +18,13 @@
     </div>
 
     <div class="w-1/3 flex justify-center font-semibold">
-      Staffy
+      <template v-if="score">
+        {{ score.title }}
+      </template>
+
+      <template v-else>
+        Staffy
+      </template>
     </div>
 
     <div class="w-1/3 flex items-center justify-end space-x-4">
