@@ -19,11 +19,15 @@ Route::get('', [DefaultController::class, 'app'])->name('app');
 Route::get('login', [DefaultController::class, 'app'])->name('login');
 Route::get('register', [DefaultController::class, 'app'])->name('register');
 
-Route::get('score/{score}', [DefaultController::class, 'app'])->name('login');
+Route::get('score/{score}', [DefaultController::class, 'app'])->name('score');
 
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('logout')->name('auth.logout');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('scores', [DefaultController::class, 'app'])->name('scores');
 });
 
 Route::fallback(fn() => view('404'));

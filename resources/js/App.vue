@@ -27,7 +27,7 @@ export default {
   },
 
   created() {
-    this.authenticate()
+    this.authenticate().catch(() => {})
   },
 
   methods: {

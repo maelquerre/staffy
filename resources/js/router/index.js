@@ -4,8 +4,8 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Auth from '../views/Auth.vue'
-import Dashboard from '../views/Dashboard.vue'
 import Score from '../views/Score.vue'
+import Scores from '../views/Scores.vue'
 
 Vue.use(VueRouter)
 
@@ -23,10 +23,9 @@ const routes = [
     props: { isLoginShown: false },
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
-    props: { isLoginShown: false },
+    path: '/scores',
+    name: 'scores',
+    component: Scores,
   },
   {
     path: '/score/:id',

@@ -23,5 +23,5 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Auth routes
+    // Authenticated routes
 });
