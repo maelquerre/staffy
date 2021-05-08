@@ -13,6 +13,7 @@
 
 <script>
 import Header from './components/Header'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -24,5 +25,15 @@ export default {
       return !['login', 'register'].includes(this.$route.name)
     },
   },
+
+  created() {
+    this.authenticate()
+  },
+
+  methods: {
+    ...mapActions('auth', [
+      'authenticate'
+    ]),
+  }
 }
 </script>

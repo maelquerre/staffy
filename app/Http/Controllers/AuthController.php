@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function authenticate(Request $request)
+    {
+        if (Auth::check()) {
+            return new UserResource(Auth::user());
+        }
+
+        return response()->json([
+            'message' => 'Unauthenticated.'
+        ], 401);
+    }
+
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -22,7 +33,7 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message' => 'Failed to authenticate.'
+            'message' => 'Incorrect email or password.'
         ], 401);
     }
 

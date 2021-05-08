@@ -11,11 +11,14 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 </head>
 
 <body>
 
 @yield('content')
 
+@stack('scripts')
 </body>
 </html>

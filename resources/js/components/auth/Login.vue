@@ -76,7 +76,11 @@ export default {
         password: this.password,
       }
 
-      this.login(data).catch(({ response }) => {
+      this.login(data)
+        .then(() => {
+          this.$router.push({ name: 'dashboard' })
+        })
+        .catch(({ response }) => {
         if (response.data.errors) {
           this.errors = response.data.errors
         }

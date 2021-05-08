@@ -17,6 +17,13 @@ const mutations = {
 }
 
 const actions = {
+  authenticate(context) {
+    return api.get('auth/authenticate')
+      .then(({ data }) => {
+        context.commit('setUser', { user: data.data })
+      })
+  },
+
   async login(context, data) {
     await axios.get('/sanctum/csrf-cookie')
 
@@ -38,7 +45,7 @@ const actions = {
       .then(() => {
         context.commit('setUser', null)
       })
-  }
+  },
 }
 
 export default { state, getters, mutations, actions, namespaced: true }

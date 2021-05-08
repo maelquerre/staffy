@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
-<div id="app"></div>
+@section('content')
+    <div id="app"></div>
+@endsection
 
-<script src="{{ asset('js/app.js') }}"></script>
+@push('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endpush

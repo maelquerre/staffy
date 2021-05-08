@@ -15,7 +15,7 @@
       <template v-if="isLoginShown">
         Don't have an account?
         <RouterLink
-          class="text-blue-500 underline"
+          class="text-red-500 underline"
           :to="{ name: 'register' }"
         >
           Register
@@ -25,7 +25,7 @@
       <template v-else>
         Already registered?
         <RouterLink
-          class="text-blue-500 underline"
+          class="text-red-500 underline"
           :to="{ name: 'login' }"
         >
           Login
