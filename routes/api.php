@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ScoreController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,12 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('auth')->group(function () {
-    Route::get('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
-    Route::post('login', [AuthController::class, 'login'])->name('login');
-    Route::post('register', [AuthController::class, 'register'])->name('register');
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('authenticate', [AuthController::class, 'authenticate'])->name('api.auth.authenticate');
+    Route::post('login', [AuthController::class, 'login'])->name('api.auth.login');
+    Route::post('register', [AuthController::class, 'register'])->name('api.auth.register');
+    Route::post('logout', [AuthController::class, 'logout'])->name('api.auth.logout');
+});
+
+Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
+
+Route::prefix('scores/{score}')->group(function () {
+    Route::get('', [ScoreController::class, 'show'])->name('api.scores.show');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Authenticated routes
+    Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
 });

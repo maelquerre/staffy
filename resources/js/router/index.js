@@ -28,7 +28,7 @@ const routes = [
     component: Scores,
   },
   {
-    path: '/score/:id',
+    path: '/score/:hash',
     name: 'score',
     component: Score,
   },

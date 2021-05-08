@@ -7,7 +7,10 @@
         />
       </button>
 
-      <button class="btn btn-text p-1">
+      <button
+        class="btn btn-text p-1"
+        @click="handleCreateScore"
+      >
         <PlusIcon
           size="18"
         />
@@ -76,25 +79,38 @@ export default {
   },
 
   computed: {
-    ...mapState('auth', [
-      'user',
-    ]),
+    ...mapState({
+      user: state => state.auth.user,
+      score: state => state.score.score,
+    }),
 
-    ...mapGetters('auth', [
-      'isAuthenticated'
-    ]),
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated',
+    }),
   },
 
   methods: {
     ...mapActions({
       logout: 'auth/logout',
+      createScore: 'score/createScore',
     }),
+
+    handleCreateScore() {
+      this.createScore().then(() => {
+        this.$router.push({
+          name: 'score',
+          params: {
+            hash: this.score.hash
+          }
+        })
+      })
+    },
 
     handleLogout() {
       this.logout().then(() => {
         this.$router.push({ name: 'login' })
       })
-    }
+    },
   }
 }
 </script>

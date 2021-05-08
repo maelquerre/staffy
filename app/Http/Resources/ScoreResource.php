@@ -16,9 +16,9 @@ class ScoreResource extends JsonResource
     {
         return [
             'id'      => $this->id,
+            'user_id' => $this->user_id,
             'hash'    => $this->hash,
             'title'   => $this->title,
-            'meter'   => $this->meter,
             'content' => $this->content,
         ];
     }

@@ -1,4 +1,5 @@
 import api from '../../service/api'
+import { randomString } from '../../core/utils'
 
 const state = {
   score: {
@@ -27,7 +28,10 @@ const state = {
     `
   },
 }
-const getters = {}
+
+const getters = {
+  score: state => state.score,
+}
 
 const mutations = {
   setScore(state, { score }) {
@@ -37,9 +41,24 @@ const mutations = {
 
 const actions = {
   fetchScore(context, { hash }) {
-    return api.get(`score/${hash}`).then(({ data }) => {
+    return api.get(`scores/${hash}`).then(({ data }) => {
       context.commit('setScore', { score: data.data })
     })
+  },
+
+  createScore(context) {
+    const score = {
+      title: 'Untitled',
+      hash: randomString(8),
+      content: 'X:1'
+    }
+
+    return api.post(`scores`, score)
+      .then(({ data }) => context.commit('setScore', { score: data.data }))
+  },
+
+  saveScore(context, { score }) {
+    return api.patch(`scores/${score.hash}`, score)
   },
 }
 
