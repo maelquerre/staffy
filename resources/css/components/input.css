@@ -14,7 +14,7 @@
   }
 
   &:focus {
-    border-color: theme('colors.blue.500');
+    border-color: theme('colors.gray.500');
     outline: none;
   }
 

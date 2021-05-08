@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div
+      v-if="errors['global']"
+      class="mb-2 ml-1 space-y-3 text-xs text-red-500"
+    >
+      <div v-for="error in errors['global']">
+        {{ error }}
+      </div>
+    </div>
+
     <div>
       <label>
         <input
@@ -81,10 +90,12 @@ export default {
           this.$router.push({ name: 'dashboard' })
         })
         .catch(({ response }) => {
-        if (response.data.errors) {
-          this.errors = response.data.errors
-        }
-      })
+          if (response.data.errors) {
+            this.errors = response.data.errors
+          } else if (response.data.message) {
+            this.errors = { 'global': [response.data.message] }
+          }
+        })
     },
   },
 }

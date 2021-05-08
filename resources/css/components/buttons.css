@@ -41,15 +41,15 @@
 .btn-text {
   color: theme('colors.gray.900');
 
+  &.active {
+    background-color: theme('colors.gray.200');
+  }
+
   &:hover {
     background-color: theme('colors.gray.100');
   }
 
   &:active {
     background-color: theme('colors.gray.300');
-  }
-
-  &.active {
-    background-color: theme('colors.gray.200');
   }
 }

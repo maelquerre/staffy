@@ -43,7 +43,7 @@ const actions = {
   logout(context) {
     return api.post('auth/logout')
       .then(() => {
-        context.commit('setUser', null)
+        context.commit('setUser', { user: null })
       })
   },
 }
