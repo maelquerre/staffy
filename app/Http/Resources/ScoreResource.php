@@ -15,10 +15,11 @@ class ScoreResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'    => $this->id,
-            'title' => $this->title,
-            'meter' => $this->meter,
-            'content'  => $this->content,
+            'id'      => $this->id,
+            'hash'    => $this->hash,
+            'title'   => $this->title,
+            'meter'   => $this->meter,
+            'content' => $this->content,
         ];
     }
 }

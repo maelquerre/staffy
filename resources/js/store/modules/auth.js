@@ -7,7 +7,7 @@ const state = {
 const getters = {
   isAuthenticated(state) {
     return state.user !== null
-  }
+  },
 }
 
 const mutations = {
@@ -26,10 +26,17 @@ const actions = {
       })
   },
 
-  async register(context, data) {
+  register(context, data) {
     return api.post('auth/register', data)
       .then(({ data }) => {
         context.commit('setUser', { user: data.data })
+      })
+  },
+
+  logout(context) {
+    return api.post('auth/logout')
+      .then(() => {
+        context.commit('setUser', null)
       })
   }
 }

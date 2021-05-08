@@ -5,4 +5,5 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  color: theme('colors.gray.900');
 }

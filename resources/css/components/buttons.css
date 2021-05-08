@@ -17,6 +17,39 @@
 .btn-default {
   color: theme('colors.gray.900');
   background-color: theme('colors.gray.50');
-  border-color: theme('colors.gray.100');
+  border-color: theme('colors.gray.200');
   box-shadow: theme('boxShadow.sm');
+
+  &:hover {
+    background-color: theme('colors.gray.100');
+  }
+}
+
+.btn-primary {
+  color: theme('colors.gray.900');
+  background-color: theme('colors.gray.100');
+
+  &:hover {
+    background-color: theme('colors.gray.200');
+  }
+
+  &:active {
+    background-color: theme('colors.gray.300');
+  }
+}
+
+.btn-text {
+  color: theme('colors.gray.900');
+
+  &:hover {
+    background-color: theme('colors.gray.100');
+  }
+
+  &:active {
+    background-color: theme('colors.gray.300');
+  }
+
+  &.active {
+    background-color: theme('colors.gray.200');
+  }
 }

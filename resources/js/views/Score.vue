@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import score from './score'
-
 import Editor from '../components/Editor'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -39,9 +38,14 @@ export default {
 
   data() {
     return {
-      score,
       editorValue: null,
     }
+  },
+
+  computed: {
+    ...mapState('score', [
+      'score',
+    ]),
   },
 
   created() {
@@ -50,12 +54,9 @@ export default {
 
   methods: {
     initEditorValue() {
-      const title = this.score.title ? `\nT:${this.score.title}` : ''
-      const composer = this.score.composer ? `\nC:${this.score.composer}` : ''
-      const key = this.score.key ? `\nK:${this.score.key}` : ''
       const content = this.score.content ? `\n${this.score.content.trimStart()}` : ''
 
-      this.editorValue = `X:1${title}${composer}${key}${content}`.replace(/(\n) +/g, '$1')
+      this.editorValue = content.replace(/(\n) +/g, '$1')
     }
   }
 }

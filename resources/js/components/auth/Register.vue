@@ -65,7 +65,7 @@
 
     <div>
       <button
-        class="btn btn-default mt-6"
+        class="btn btn-default text-sm w-full mt-6 py-2 px-3"
         @click="handleRegister"
       >
         Register

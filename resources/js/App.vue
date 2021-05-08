@@ -5,7 +5,7 @@
       class="flex-shrink-0"
     />
 
-    <main class="h-full flex flex-col">
+    <main class="flex-grow flex flex-col">
       <RouterView />
     </main>
   </div>

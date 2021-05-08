@@ -10,7 +10,7 @@
 
 <script>
 import abcjs from 'abcjs'
-import { EditArea } from '../views/editor'
+import { EditArea } from '../core/editor'
 
 import MonacoEditor from 'vue-monaco'
 
@@ -103,7 +103,7 @@ export default {
         },
       })
 
-      this.computeEditorSize()
+      setTimeout(this.computeEditorSize, 0) // force editor to re-compute the layout
       window.addEventListener('resize', this.computeEditorSize)
     },
   }
