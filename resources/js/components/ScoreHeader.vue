@@ -1,17 +1,14 @@
 <template>
-  <div
+  <input
     v-if="isEditing"
+    v-model="title"
+    v-focus
+    class="block w-full text-center text-sm font-medium border border-gray-200 rounded focus:outline-none"
+    type="text"
+    @blur="submitEdit"
+    @keydown.enter="submitEdit"
+    @keydown.esc="cancelEdit"
   >
-    <input
-      v-model="title"
-      v-focus
-      class="block w-full text-center text-sm font-medium border border-gray-200 rounded focus:outline-none"
-      type="text"
-      @blur="submitEdit"
-      @keydown.enter="submitEdit"
-      @keydown.esc="cancelEdit"
-    >
-  </div>
 
   <div
     v-else
