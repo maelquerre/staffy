@@ -45,6 +45,13 @@ const actions = {
   saveScore(context, { score }) {
     return api.patch(`scores/${score.hash}`, score)
   },
+
+  deleteScore(context, { score }) {
+    return api.delete(`scores/${score.hash}`)
+      .then(() => {
+        context.commit('setScores', { scores: context.state.scores.filter(({ hash }) => hash !== score.hash) })
+      })
+  }
 }
 
 export default { state, getters, mutations, actions, namespaced: true }

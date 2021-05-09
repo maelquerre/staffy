@@ -22,8 +22,8 @@ class ScoreController extends Controller
     }
 
     /**
-     * @param  Score  $score
-     * @return ScoreResource
+     * @param  \App\Models\Score  $score
+     * @return \App\Http\Resources\ScoreResource
      */
     public function show(Score $score)
     {
@@ -31,8 +31,8 @@ class ScoreController extends Controller
     }
 
     /**
-     * @param  Request  $request
-     * @param  Authenticatable  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(Request $request, Authenticatable $user)
@@ -53,9 +53,9 @@ class ScoreController extends Controller
     }
 
     /**
-     * @param  Request  $request
-     * @param  Score  $score
-     * @return ScoreResource
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Score  $score
+     * @return \App\Http\Resources\ScoreResource
      */
     public function update(Request $request, Score $score)
     {
@@ -68,5 +68,17 @@ class ScoreController extends Controller
         $score->save();
 
         return $this->show($score);
+    }
+
+    /**
+     * @param  \App\Models\Score  $score
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|object
+     * @throws \Exception
+     */
+    public function delete(Score $score)
+    {
+        $score->delete();
+
+        return response()->noContent();
     }
 }

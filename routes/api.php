@@ -32,4 +32,8 @@ Route::prefix('scores/{score:hash}')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
+
+    Route::prefix('scores/{score:hash}')->group(function () {
+        Route::delete('', [ScoreController::class, 'delete'])->name('api.scores.delete');
+    });
 });

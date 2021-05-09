@@ -54,7 +54,7 @@
 
           <button
             class="btn btn-danger p-1"
-            @click.prevent="handleDeleteScore(score.id)"
+            @click.prevent="requestScoreDeletion(score)"
           >
             <Trash2Icon
               size="14"
@@ -63,6 +63,13 @@
         </div>
       </RouterLink>
     </div>
+
+    <DeleteScoreModal
+      v-if="isDeleteScoreModalOpen"
+      :score="scoreToDelete"
+      @cancel="isDeleteScoreModalOpen = false"
+      @confirm="handleScoreDeletion"
+    />
   </div>
 </template>
 
@@ -70,11 +77,13 @@
 import { mapActions, mapState } from 'vuex'
 
 import { Edit2Icon, PlusIcon, Trash2Icon } from 'vue-feather-icons'
+import DeleteScoreModal from '../components/modals/DeleteScoreModal'
 
 import withScoreActions from '../mixins/withScoreActions'
 
 export default {
   components: {
+    DeleteScoreModal,
     Edit2Icon,
     PlusIcon,
     Trash2Icon,
@@ -83,6 +92,13 @@ export default {
   mixins: [
     withScoreActions,
   ],
+
+  data() {
+    return {
+      isDeleteScoreModalOpen: false,
+      scoreToDelete: null,
+    }
+  },
 
   computed: {
     ...mapState({
@@ -100,11 +116,18 @@ export default {
   methods: {
     ...mapActions({
       fetchScores: 'score/fetchScores',
+      deleteScore: 'score/deleteScore',
     }),
 
-    handleDeleteScore(scoreId) {
+    requestScoreDeletion(score) {
+      this.scoreToDelete = score
+      this.isDeleteScoreModalOpen = true
+    },
 
-    }
+    handleScoreDeletion() {
+      this.deleteScore({ score: this.scoreToDelete })
+      this.isDeleteScoreModalOpen = false
+    },
   }
 }
 </script>
