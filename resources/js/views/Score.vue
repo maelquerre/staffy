@@ -39,15 +39,12 @@ export default {
     ...mapState({
       score: state => state.score.score,
       scoreContent: state => state.score.scoreContent,
-      isSavingScore: state => state.score.isSavingScore,
+      isUpdatingScore: state => state.score.isUpdatingScore,
     }),
   },
 
   created() {
     this.fetchScore({ hash: this.$route.params.hash })
-      .catch((response) => {
-        console.log(response)
-      })
   },
 
   mounted() {
@@ -61,7 +58,7 @@ export default {
   methods: {
     ...mapActions({
       fetchScore: 'score/fetchScore',
-      saveScore: 'score/saveScore',
+      updateScore: 'score/updateScore',
       updateScoreContent: 'score/updateScoreContent',
     }),
 
@@ -74,7 +71,7 @@ export default {
         event.preventDefault()
 
         const data = { content: this.scoreContent }
-        this.saveScore(data)
+        this.updateScore({ score: this.score, data })
       }
     },
   }

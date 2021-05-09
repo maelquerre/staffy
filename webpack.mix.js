@@ -21,7 +21,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
   .webpackConfig({
     plugins: [
       new MonacoEditorPlugin({
-        languages: ['javascript', 'css', 'html']
+        languages: ['javascript']
       })
     ]
   });

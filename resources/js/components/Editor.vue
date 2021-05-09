@@ -92,7 +92,7 @@ export default {
 
   methods: {
     computeEditorSize() {
-      this.$refs.editor.getEditor().layout()
+      this.$refs.editor?.getEditor().layout()
     },
 
     initEditor() {

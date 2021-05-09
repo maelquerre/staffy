@@ -5,7 +5,8 @@ const state = {
   score: null,
   scores: [],
   scoreContent: '',
-  isSavingScore: false,
+  isFetchingScore: false,
+  isUpdatingScore: false,
 }
 
 const getters = {}
@@ -24,15 +25,22 @@ const mutations = {
     state.scoreContent = content
   },
 
-  setIsSavingScore(state, value) {
-    state.isSavingScore = value
+  setIsFetchingScore(state, value) {
+    state.isFetchingScore = value
+  },
+
+  setIsUpdatingScore(state, value) {
+    state.isUpdatingScore = value
   },
 }
 
 const actions = {
-  fetchScore(context, { hash }) {
+  fetchScore({ commit, state }, { hash }) {
+    commit('setIsFetchingScore', true)
+
     return api.get(`scores/${hash}`).then(({ data }) => {
-      context.commit('setScore', { score: data.data })
+      commit('setScore', { score: data.data })
+      commit('setIsFetchingScore', false)
     })
   },
 
@@ -49,25 +57,47 @@ const actions = {
       content: 'X:1'
     }
 
-    return api.post(`scores`, score)
-      .then(({ data }) => context.commit('setScore', { score: data.data }))
+    return context.dispatch('storeScore', { score })
+      .then(({ data }) => {
+        context.commit('setScore', { score: data.data })
+      })
   },
 
-  saveScore({ commit, state }, data) {
-    if (state.isSavingScore) return
+  storeScore(context, { score }) {
+    return api.post(`scores`, score)
+  },
 
-    commit('setIsSavingScore', true)
-    return api.patch(`scores/${state.score.hash}`, data)
+  updateScore({ commit, state }, { score, data }) {
+    if (state.isUpdatingScore === score.id) return
+
+    commit('setIsUpdatingScore', score.id)
+
+    return api.patch(`scores/${score.hash}`, data)
       .then(({ data }) => {
-        commit('setScore', { score: data.data })
-        commit('setIsSavingScore', false)
+        const updatedScore = data.data
+
+        commit('setScore', { score: updatedScore })
+
+        commit('setScores', {
+          scores: state.scores.map((score) => {
+            if (score.hash === updatedScore.hash) {
+              return updatedScore
+            }
+
+            return score
+          })
+        })
+
+        commit('setIsUpdatingScore', false)
       })
   },
 
   deleteScore(context, { score }) {
     return api.delete(`scores/${score.hash}`)
       .then(() => {
-        context.commit('setScores', { scores: context.state.scores.filter(({ hash }) => hash !== score.hash) })
+        context.commit('setScores', {
+          scores: context.state.scores.filter(({ hash }) => hash !== score.hash)
+        })
       })
   },
 

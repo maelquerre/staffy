@@ -40,7 +40,7 @@
             >
               <div
                 v-if="title"
-                class="text-sm"
+                class="text-sm font-medium"
               >
                 {{ title }}
               </div>

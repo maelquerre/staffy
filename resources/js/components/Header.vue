@@ -24,11 +24,8 @@
 
     <div class="w-1/3 text-center text-sm font-medium">
       <ScoreHeader
-        v-if="$route.name === 'score' && score"
-        :score="score"
-      >
-        {{ score.title }}
-      </ScoreHeader>
+        v-if="$route.name === 'score'"
+      />
 
       <template v-else-if="$route.name === 'scores'">
         Recent scores
@@ -43,7 +40,7 @@
       <button
         v-if="$route.name === 'score'"
         class="btn btn-text p-1"
-        :disabled="isSavingScore"
+        :disabled="isUpdatingScore"
         @click="handleSaveScore"
       >
         <SaveIcon
@@ -132,7 +129,7 @@ export default {
     ...mapState({
       user: state => state.auth.user,
       scoreContent: state => state.score.scoreContent,
-      isSavingScore: state => state.score.isSavingScore,
+      isUpdatingScore: state => state.score.isUpdatingScore,
     }),
 
     ...mapGetters({
@@ -143,12 +140,12 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
-      saveScore: 'score/saveScore',
+      updateScore: 'score/updateScore',
     }),
 
     handleSaveScore() {
       const data = { content: this.scoreContent }
-      this.saveScore(data)
+      this.updateScore({ score: this.score, data })
     },
 
     handleLogout() {

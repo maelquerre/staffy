@@ -5,9 +5,9 @@
     v-focus
     class="block w-full text-center text-sm font-medium border border-gray-200 rounded focus:outline-none"
     type="text"
-    @blur="submitEdit"
-    @keydown.enter="submitEdit"
-    @keydown.esc="cancelEdit"
+    @blur="renameScore"
+    @keydown.enter="renameScore"
+    @keydown.esc="cancelRename"
   >
 
   <div
@@ -20,43 +20,55 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  props: {
-    score: {
-      type: Object,
-      required: true,
-    },
-  },
-
   data() {
     return {
-      title: this.score.title,
+      title: '',
       isEditing: false,
+    }
+  },
+
+  computed: {
+    ...mapState({
+      score: state => state.score.score,
+      isFetchingScore: state => state.score.isFetchingScore,
+    }),
+  },
+
+  watch: {
+    score: {
+      immediate: true,
+      handler: function (score) {
+        if (this.isFetchingScore || !score) {
+          this.title = ''
+        } else {
+          this.title = score.title
+        }
+      }
     }
   },
 
   methods: {
     ...mapActions({
-      saveScore: 'score/saveScore',
+      updateScore: 'score/updateScore',
     }),
 
-    cancelEdit() {
+    cancelRename() {
       this.title = this.score.title
       this.isEditing = false
     },
 
-    submitEdit() {
-      const { hash } = this.score
+    renameScore() {
       const data = { title: this.title || 'Untitled' }
 
-      this.saveScore({ hash, data })
+      this.updateScore({ score: this.score, data })
         .then(() => {
           this.title = this.score.title
           this.isEditing = false
         })
-        .catch(() => this.cancelEdit())
+        .catch(() => this.cancelRename())
     },
   },
 }

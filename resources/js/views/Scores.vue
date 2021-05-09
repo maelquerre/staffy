@@ -57,7 +57,7 @@
           <template #items>
             <button
               class="flex items-center w-full py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
-              @click.prevent
+              @click.prevent="requestScoreRenaming(score)"
             >
               <Edit2Icon
                 class="mr-2"
@@ -84,8 +84,15 @@
     <DeleteScoreModal
       v-if="isDeleteScoreModalOpen"
       :score="scoreToDelete"
-      @cancel="isDeleteScoreModalOpen = false"
+      @cancel="cancelScoreDeletion"
       @confirm="handleScoreDeletion"
+    />
+
+    <RenameScoreModal
+      v-if="isRenameScoreModalOpen"
+      :score="scoreToRename"
+      @cancel="cancelScoreRenaming"
+      @submit="handleScoreRenaming"
     />
   </div>
 </template>
@@ -96,16 +103,18 @@ import { mapActions, mapState } from 'vuex'
 import { Edit2Icon, MoreHorizontalIcon, PlusIcon, Trash2Icon } from 'vue-feather-icons'
 import DeleteScoreModal from '../components/modals/DeleteScoreModal'
 import Dropdown from '../components/Dropdown'
+import RenameScoreModal from '../components/modals/RenameScoreModal'
 
 import withScore from '../mixins/withScore'
 
 export default {
   components: {
-    Dropdown,
     DeleteScoreModal,
+    Dropdown,
     Edit2Icon,
     MoreHorizontalIcon,
     PlusIcon,
+    RenameScoreModal,
     Trash2Icon,
   },
 
@@ -116,12 +125,15 @@ export default {
   data() {
     return {
       isDeleteScoreModalOpen: false,
+      isRenameScoreModalOpen: false,
       scoreToDelete: null,
+      scoreToRename: null,
     }
   },
 
   computed: {
     ...mapState({
+      score: state => state.score.score,
       scores: state => state.score.scores,
     }),
   },
@@ -136,12 +148,34 @@ export default {
   methods: {
     ...mapActions({
       fetchScores: 'score/fetchScores',
+      updateScore: 'score/updateScore',
       deleteScore: 'score/deleteScore',
     }),
+
+    requestScoreRenaming(score) {
+      this.scoreToRename = score
+      this.isRenameScoreModalOpen = true
+    },
+
+    cancelScoreRenaming() {
+      this.scoreToRename = null
+      this.isRenameScoreModalOpen = false
+    },
+
+    handleScoreRenaming(title) {
+      const data = { title }
+      this.updateScore({ score: this.scoreToRename, data })
+      this.isRenameScoreModalOpen = false
+    },
 
     requestScoreDeletion(score) {
       this.scoreToDelete = score
       this.isDeleteScoreModalOpen = true
+    },
+
+    cancelScoreDeletion() {
+      this.scoreToDelete = null
+      this.isDeleteScoreModalOpen = false
     },
 
     handleScoreDeletion() {

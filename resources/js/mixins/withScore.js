@@ -9,11 +9,11 @@ export default {
 
   methods: {
     ...mapActions({
-      createNewScore: 'score/newScore',
+      newScore: 'score/newScore',
     }),
 
     createScore() {
-      this.createNewScore().then(() => {
+      this.newScore().then(() => {
         this.$router.push({
           name: 'score',
           params: {
