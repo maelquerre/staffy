@@ -1,11 +1,12 @@
 <template>
   <div class="relative inline-block text-left text-sm">
     <span
-      class="cursor-pointer"
-      @click="isOpen = !isOpen"
+      class="inline-block cursor-pointer"
+      @click.prevent="isOpen = !isOpen"
     >
       <slot
         name="toggle"
+        :isOpen="isOpen"
       />
     </span>
 
@@ -21,7 +22,7 @@
         v-if="isOpen"
         aria-labelledby="menu-button"
         aria-orientation="vertical"
-        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="origin-top-right absolute right-0 mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
         role="menu"
         tabindex="-1"
       >

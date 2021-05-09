@@ -68,7 +68,7 @@
 
             <template #items>
               <button
-                class="w-full flex items-center py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
+                class="flex items-center w-full py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
                 @click="handleLogout"
               >
                 <LogOutIcon
