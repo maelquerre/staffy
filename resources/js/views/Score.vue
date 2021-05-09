@@ -73,8 +73,6 @@ export default {
       if ((event.ctrlKey || event.metaKey) && event.key === 's') {
         event.preventDefault()
 
-        if (this.isSavingScore) return
-
         const data = { content: this.scoreContent }
         this.saveScore(data)
       }

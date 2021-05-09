@@ -43,6 +43,7 @@
       <button
         v-if="$route.name === 'score'"
         class="btn btn-text p-1"
+        :disabled="isSavingScore"
         @click="handleSaveScore"
       >
         <SaveIcon
@@ -131,6 +132,7 @@ export default {
     ...mapState({
       user: state => state.auth.user,
       scoreContent: state => state.score.scoreContent,
+      isSavingScore: state => state.score.isSavingScore,
     }),
 
     ...mapGetters({

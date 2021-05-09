@@ -54,6 +54,8 @@ const actions = {
   },
 
   saveScore({ commit, state }, data) {
+    if (state.isSavingScore) return
+
     commit('setIsSavingScore', true)
     return api.patch(`scores/${state.score.hash}`, data)
       .then(({ data }) => {
