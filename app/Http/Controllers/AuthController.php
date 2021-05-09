@@ -29,6 +29,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated, true)) {
+            $request->session()->regenerate();
+
             return new UserResource(Auth::user());
         }
 

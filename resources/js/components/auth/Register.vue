@@ -86,13 +86,18 @@
 <script>
 import { mapActions } from 'vuex'
 
+import withAuthentication from '../../mixins/withAuthentication'
+
 export default {
+  mixins: [
+    withAuthentication,
+  ],
+
   data() {
     return {
       name: '',
       email: '',
       password: '',
-      errors: {},
     }
   },
 
@@ -109,16 +114,8 @@ export default {
       }
 
       this.register(data)
-        .then(() => {
-          this.$router.push({ name: 'dashboard' })
-        })
-        .catch(({ response }) => {
-          if (response.data.errors) {
-            this.errors = response.data.errors
-          } else if (response.data.message) {
-            this.errors = { 'global': [response.data.message] }
-          }
-        })
+        .then(this.onAuthenticationSuccess)
+        .catch(this.onAuthenticationError)
     },
   },
 }
