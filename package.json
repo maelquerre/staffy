@@ -1,4 +1,6 @@
 {
+    "name": "staffy",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -30,5 +32,8 @@
         "tailwindcss": "^2.1.2",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12"
+    },
+    "engines": {
+        "node": "14.x"
     }
 }
