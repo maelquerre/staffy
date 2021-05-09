@@ -33,6 +33,7 @@
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
       <RouterLink
         v-for="score in scores"
+        :key="score.id"
         class="group flex items-start justify-between p-2 text-sm bg-white border border-gray-200 rounded-md hover:bg-gray-100"
         :to="{ name: 'score', params: { hash: score.hash } }"
       >

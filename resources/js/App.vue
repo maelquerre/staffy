@@ -14,9 +14,11 @@
 <script>
 import Header from './components/Header'
 import { mapActions } from 'vuex'
+import Dropdown from './components/Dropdown'
 
 export default {
   components: {
+    Dropdown,
     Header,
   },
 
