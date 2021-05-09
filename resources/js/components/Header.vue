@@ -124,7 +124,6 @@ export default {
   computed: {
     ...mapState({
       user: state => state.auth.user,
-      score: state => state.score.score,
     }),
 
     ...mapGetters({

@@ -1,6 +1,12 @@
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
+  computed: {
+    ...mapState({
+      score: state => state.score.score,
+    }),
+  },
+
   methods: {
     ...mapActions({
       createNewScore: 'score/newScore',
