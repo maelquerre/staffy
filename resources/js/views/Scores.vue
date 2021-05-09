@@ -34,7 +34,7 @@
       <RouterLink
         v-for="score in scores"
         :key="score.id"
-        class="group flex items-start justify-between p-2 text-sm bg-white border border-gray-200 rounded-md hover:bg-gray-100"
+        class="group flex items-start justify-between p-2 text-sm bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50"
         :to="{ name: 'score', params: { hash: score.hash } }"
       >
         <div>
