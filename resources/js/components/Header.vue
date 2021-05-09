@@ -2,7 +2,7 @@
   <header class="flex items-center justify-between py-2 px-4 border-b border-gray-200 shadow-sm relative z-10">
     <div class="w-1/3 flex items-center space-x-2">
       <RouterLink
-        class="btn btn-text p-1"
+        class="btn btn-text p-1 cursor-default"
         title="Show scores"
         :to="{ name: 'scores' }"
       >
