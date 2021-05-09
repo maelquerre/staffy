@@ -4,6 +4,8 @@ import { randomString } from '../../core/utils'
 const state = {
   score: null,
   scores: [],
+  scoreContent: '',
+  isSavingScore: false,
 }
 
 const getters = {}
@@ -11,10 +13,19 @@ const getters = {}
 const mutations = {
   setScore(state, { score }) {
     state.score = score
+    state.scoreContent = score.content
   },
 
   setScores(state, { scores }) {
     state.scores = scores
+  },
+
+  setScoreContent(state, { content }) {
+    state.scoreContent = content
+  },
+
+  setIsSavingScore(state, value) {
+    state.isSavingScore = value
   },
 }
 
@@ -42,8 +53,13 @@ const actions = {
       .then(({ data }) => context.commit('setScore', { score: data.data }))
   },
 
-  saveScore(context, { score }) {
-    return api.patch(`scores/${score.hash}`, score)
+  saveScore({ commit, state }, data) {
+    commit('setIsSavingScore', true)
+    return api.patch(`scores/${state.score.hash}`, data)
+      .then(({ data }) => {
+        commit('setScore', { score: data.data })
+        commit('setIsSavingScore', false)
+      })
   },
 
   deleteScore(context, { score }) {
@@ -51,7 +67,11 @@ const actions = {
       .then(() => {
         context.commit('setScores', { scores: context.state.scores.filter(({ hash }) => hash !== score.hash) })
       })
-  }
+  },
+
+  updateScoreContent(context, { content }) {
+    context.commit('setScoreContent', { content })
+  },
 }
 
 export default { state, getters, mutations, actions, namespaced: true }

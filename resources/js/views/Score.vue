@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!editorValue">
+  <div v-if="!scoreContent">
     Loading
   </div>
 
@@ -11,8 +11,8 @@
       <Editor
         class="absolute inset-0"
         canvasId="preview"
-        :value="editorValue"
-        @change="editorValue = $event"
+        :value="scoreContent"
+        @change="updateEditorValue"
       />
     </div>
 
@@ -38,19 +38,9 @@ export default {
   computed: {
     ...mapState({
       score: state => state.score.score,
+      scoreContent: state => state.score.scoreContent,
+      isSavingScore: state => state.score.isSavingScore,
     }),
-
-    editorValue: {
-      get() {
-        if (!this.score) {
-          return null
-        }
-
-        const content = this.score.content ? `\n${this.score.content.trimStart()}` : ''
-
-        return content.replace(/(\n) +/g, '$1')
-      }
-    }
   },
 
   created() {
@@ -60,10 +50,35 @@ export default {
       })
   },
 
+  mounted() {
+    document.addEventListener('keydown', this.saveScoreListener)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.saveScoreListener)
+  },
+
   methods: {
     ...mapActions({
-      fetchScore: 'score/fetchScore'
+      fetchScore: 'score/fetchScore',
+      saveScore: 'score/saveScore',
+      updateScoreContent: 'score/updateScoreContent',
     }),
+
+    updateEditorValue(editorValue) {
+      this.updateScoreContent({ content: editorValue })
+    },
+
+    saveScoreListener(event) {
+      if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault()
+
+        if (this.isSavingScore) return
+
+        const data = { content: this.scoreContent }
+        this.saveScore(data)
+      }
+    },
   }
 }
 </script>

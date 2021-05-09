@@ -95,9 +95,9 @@ import { mapActions, mapState } from 'vuex'
 
 import { Edit2Icon, MoreHorizontalIcon, PlusIcon, Trash2Icon } from 'vue-feather-icons'
 import DeleteScoreModal from '../components/modals/DeleteScoreModal'
-
-import withScoreActions from '../mixins/withScoreActions'
 import Dropdown from '../components/Dropdown'
+
+import withScore from '../mixins/withScore'
 
 export default {
   components: {
@@ -110,7 +110,7 @@ export default {
   },
 
   mixins: [
-    withScoreActions,
+    withScore,
   ],
 
   data() {

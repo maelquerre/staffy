@@ -30,10 +30,13 @@ Route::prefix('scores/{score:hash}')->group(function () {
     Route::get('', [ScoreController::class, 'show'])->name('api.scores.show');
 });
 
+// Authenticated routes
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
 
     Route::prefix('scores/{score:hash}')->group(function () {
+        Route::patch('', [ScoreController::class, 'update'])->name('api.scores.update');
         Route::delete('', [ScoreController::class, 'delete'])->name('api.scores.delete');
     });
 });

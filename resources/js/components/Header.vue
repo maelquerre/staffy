@@ -22,10 +22,13 @@
       </button>
     </div>
 
-    <div class="w-1/3 flex justify-center text-sm font-medium">
-      <template v-if="$route.name === 'score' && score">
+    <div class="w-1/3 text-center text-sm font-medium">
+      <ScoreHeader
+        v-if="$route.name === 'score' && score"
+        :score="score"
+      >
         {{ score.title }}
-      </template>
+      </ScoreHeader>
 
       <template v-else-if="$route.name === 'scores'">
         Recent scores
@@ -40,6 +43,7 @@
       <button
         v-if="$route.name === 'score'"
         class="btn btn-text p-1"
+        @click="handleSaveScore"
       >
         <SaveIcon
           size="18"
@@ -104,12 +108,14 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 
 import { LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
-
-import withScoreActions from '../mixins/withScoreActions'
 import Dropdown from './Dropdown'
+import ScoreHeader from './ScoreHeader'
+
+import withScore from '../mixins/withScore'
 
 export default {
   components: {
+    ScoreHeader,
     Dropdown,
     LogOutIcon,
     MenuIcon,
@@ -118,12 +124,13 @@ export default {
   },
 
   mixins: [
-    withScoreActions,
+    withScore,
   ],
 
   computed: {
     ...mapState({
       user: state => state.auth.user,
+      scoreContent: state => state.score.scoreContent,
     }),
 
     ...mapGetters({
@@ -134,7 +141,13 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
+      saveScore: 'score/saveScore',
     }),
+
+    handleSaveScore() {
+      const data = { content: this.scoreContent }
+      this.saveScore(data)
+    },
 
     handleLogout() {
       this.logout().then(() => {
