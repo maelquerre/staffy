@@ -36,7 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
 
     Route::prefix('scores/{score:hash}')->group(function () {
-        Route::patch('', [ScoreController::class, 'update'])->name('api.scores.update');
-        Route::delete('', [ScoreController::class, 'delete'])->name('api.scores.delete');
+        Route::patch('', [ScoreController::class, 'update'])
+             ->middleware('can:update,score')
+             ->name('api.scores.update');
+        Route::delete('', [ScoreController::class, 'delete'])
+             ->middleware('can:delete,score')
+             ->name('api.scores.delete');
     });
 });
