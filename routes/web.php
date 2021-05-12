@@ -26,7 +26,7 @@ Route::prefix('auth')->group(function () {
     Route::post('logout')->name('auth.logout');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('scores', [DefaultController::class, 'app'])->name('scores');
 });
 
