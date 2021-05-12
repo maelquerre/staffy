@@ -29,9 +29,7 @@
         role="menu"
         tabindex="-1"
       >
-        <div role="none">
-          <slot name="items" />
-        </div>
+        <slot name="items" />
       </div>
     </transition>
   </div>

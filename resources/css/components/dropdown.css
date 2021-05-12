@@ -1,5 +1,6 @@
 .dropdown {
   width: theme('spacing.56');
+  padding: theme('spacing.1');
   background-color: theme('colors.white');
   border: 1px solid theme('colors.gray.200');
   border-radius: theme('borderRadius.md');
@@ -12,16 +13,17 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: theme('spacing.2') theme('spacing.3');
-  font-size: theme('fontSize.sm');
+  padding: theme('spacing.1') theme('spacing.3');
+  font-size: 13px;
   text-align: left;
-
-  &:not(:first-child) {
-    border-top: 1px solid theme('colors.gray.200');
-  }
+  border-radius: theme('borderRadius.DEFAULT');
 
   &:hover,
   &:focus {
     background-color: theme('colors.gray.100');
+  }
+
+  &:focus {
+    outline: none;
   }
 }

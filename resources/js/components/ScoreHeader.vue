@@ -11,8 +11,8 @@
   >
 
   <div
-    v-else
-    class="cursor-text hover:border border-gray-200 rounded"
+    v-else-if="title"
+    class="cursor-text border border-transparent hover:border-gray-200 rounded truncate"
     @click="isEditing = true"
   >
     {{ title }}
@@ -61,9 +61,13 @@ export default {
     },
 
     renameScore() {
+      if (this.title === this.score.title) {
+        return this.cancelRename()
+      }
+
       const data = { title: this.title || 'Untitled' }
 
-      this.updateScore({ score: this.score, data })
+      return this.updateScore({ score: this.score, data })
         .then(() => {
           this.title = this.score.title
           this.isEditing = false
