@@ -11,14 +11,14 @@
 
     <div class="flex items-center justify-end space-x-3 mt-8">
       <button
-        class="btn btn-primary py-2"
+        class="btn btn-default"
         @click="$emit('cancel')"
       >
         Cancel
       </button>
 
       <button
-        class="btn btn-danger py-2"
+        class="btn btn-danger"
         @click="$emit('confirm')"
       >
         Delete score

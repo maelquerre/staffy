@@ -9,8 +9,9 @@ import App from './App.vue'
 
 // Directives
 
-import { focus } from './core/directives'
+import { clickOutside, focus } from './core/directives'
 
+Vue.directive('click-outside', clickOutside)
 Vue.directive('focus', focus)
 
 // Filters

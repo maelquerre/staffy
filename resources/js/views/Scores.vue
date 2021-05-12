@@ -34,18 +34,18 @@
       <RouterLink
         v-for="score in scores"
         :key="score.id"
-        class="group flex items-start justify-between py-2 px-3 text-sm bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50"
+        class="group flex items-start justify-between py-2 px-3 bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50"
         :to="{ name: 'score', params: { hash: score.hash } }"
       >
         <div>
-          <div class="font-medium">{{ score.title }}</div>
+          <div class="text-sm font-medium">{{ score.title }}</div>
           <div class="mt-1 text-xs text-gray-400">Created {{ score.created_at | date }}</div>
         </div>
 
         <Dropdown>
           <template #toggle="{ isOpen }">
             <button
-              class="btn btn-default p-1"
+              class="btn btn-default p-1 rounded-full"
               :class="{ 'opacity-0 group-hover:opacity-100': !isOpen }"
             >
               <MoreHorizontalIcon
@@ -56,25 +56,23 @@
 
           <template #items>
             <button
-              class="flex items-center w-full py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
+              class="dropdown-item"
               @click.prevent="requestScoreRenaming(score)"
             >
+              Rename
               <Edit2Icon
-                class="mr-2"
-                size="14"
+                size="16"
               />
-              Edit
             </button>
 
             <button
-              class="flex items-center w-full py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
+              class="dropdown-item"
               @click.prevent="requestScoreDeletion(score)"
             >
-              <Trash2Icon
-                class="mr-2"
-                size="14"
-              />
               Delete
+              <Trash2Icon
+                size="16"
+              />
             </button>
           </template>
         </Dropdown>

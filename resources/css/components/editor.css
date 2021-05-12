@@ -1,5 +1,5 @@
-.monaco-editor {
-  font-family: "JetBrains Mono", monospace;
+#editor {
+  font-family: theme('fontFamily.mono');
 
   .scrollbar .slider {
     border-radius: 5px;

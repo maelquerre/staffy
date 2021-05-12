@@ -1,5 +1,8 @@
 <template>
-  <div class="relative inline-block text-left text-sm">
+  <div
+    v-click-outside="close"
+    class="relative inline-block text-left text-sm"
+  >
     <span
       class="inline-block cursor-pointer"
       @click.prevent="isOpen = !isOpen"
@@ -22,11 +25,11 @@
         v-if="isOpen"
         aria-labelledby="menu-button"
         aria-orientation="vertical"
-        class="origin-top-right absolute right-0 mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="dropdown origin-top-right absolute right-0 mt-1 focus:outline-none"
         role="menu"
         tabindex="-1"
       >
-        <div class="py-1" role="none">
+        <div role="none">
           <slot name="items" />
         </div>
       </div>
@@ -40,6 +43,14 @@ export default {
     return {
       isOpen: false,
     }
-  }
+  },
+
+  methods: {
+    close() {
+      if (this.isOpen) {
+        this.isOpen = false
+      }
+    },
+  },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="fixed z-modal inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <transition
         enter-active-class="ease-out duration-300"
@@ -33,21 +33,21 @@
           v-if="isMounted"
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
         >
-          <div class="text-xs bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="px-4 pt-5 pb-4 sm:p-6 text-sm bg-white">
             <div
               v-if="title || dismissible"
-              class="flex items-start mb-4"
+              class="flex items-start mb-6"
             >
               <div
                 v-if="title"
-                class="text-sm font-medium"
+                class="text-base font-medium"
               >
                 {{ title }}
               </div>
 
               <button
                 v-if="dismissible"
-                class="btn btn-text ml-auto -mt-2 -mr-2 p-2"
+                class="btn btn-text ml-auto -mt-1.5 -mr-1.5 p-1.5"
                 @click="$emit('close')"
               >
                 <XIcon

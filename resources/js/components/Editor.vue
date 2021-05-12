@@ -1,5 +1,6 @@
 <template>
   <MonacoEditor
+    id="editor"
     ref="editor"
     :options="monacoOptions"
     :value="value"

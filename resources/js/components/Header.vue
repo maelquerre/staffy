@@ -2,7 +2,7 @@
   <header class="flex items-center justify-between py-2 px-4 border-b border-gray-200 shadow-sm relative z-10">
     <div class="w-1/3 flex items-center space-x-2">
       <RouterLink
-        class="btn btn-text p-1 cursor-default"
+        class="btn btn-default p-1"
         title="Show scores"
         :to="{ name: 'scores' }"
       >
@@ -12,7 +12,7 @@
       </RouterLink>
 
       <button
-        class="btn btn-text p-1"
+        class="btn btn-default p-1"
         title="New score"
         @click="createScore"
       >
@@ -39,7 +39,7 @@
     <div class="w-1/3 flex items-center justify-end space-x-4">
       <button
         v-if="$route.name === 'score'"
-        class="btn btn-text p-1"
+        class="btn btn-default p-1"
         :disabled="isUpdatingScore"
         @click="handleSaveScore"
       >
@@ -68,31 +68,30 @@
         <template v-else>
           <Dropdown>
             <template #toggle>
-              <div class="flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-red-500 border border-red-400 rounded-full">
+              <div class="flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-accent border border-accent-light rounded-full">
                 {{ user.name[0] }}
               </div>
             </template>
 
             <template #items>
               <div class="flex items-center py-2 px-4">
-                <div class="flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-red-500 border border-red-400 rounded-full">
+                <div class="flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-accent border border-accent-light rounded-full">
                   {{ user.name[0] }}
                 </div>
                 <div class="ml-2 text-xs">
-                  <div>{{ user.email }}</div>
-                  <div class="text-gray-500">@{{ user.name }}</div>
+                  <div>{{ user.name }}</div>
+                  <div class="text-gray-500">{{ user.email }}</div>
                 </div>
               </div>
 
               <button
-                class="flex items-center w-full py-2 px-4 text-left text-xs hover:bg-gray-100 focus:bg-gray-100"
+                class="dropdown-item"
                 @click="handleLogout"
               >
-                <LogOutIcon
-                  class="mr-2"
-                  size="14"
-                />
                 Logout
+                <LogOutIcon
+                  size="16"
+                />
               </button>
             </template>
           </Dropdown>
