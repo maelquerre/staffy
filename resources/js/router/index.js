@@ -40,9 +40,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const authRoutes = ['login', 'register']
+  const guestRoutes = ['login', 'register']
 
-  if (store.getters['auth/isAuthenticated'] && authRoutes.includes(to.name)) {
+  if (store.getters['auth/isAuthenticated'] && guestRoutes.includes(to.name)) {
     next({ name: 'scores' })
   } else {
     next()

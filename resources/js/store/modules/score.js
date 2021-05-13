@@ -6,6 +6,7 @@ const state = {
   scores: [],
   scoreContent: '',
   isFetchingScore: false,
+  isFetchingScores: false,
   isUpdatingScore: false,
 }
 
@@ -29,13 +30,17 @@ const mutations = {
     state.isFetchingScore = value
   },
 
+  setIsFetchingScores(state, value) {
+    state.isFetchingScores = value
+  },
+
   setIsUpdatingScore(state, value) {
     state.isUpdatingScore = value
   },
 }
 
 const actions = {
-  fetchScore({ commit, state }, { hash }) {
+  fetchScore({ commit }, { hash }) {
     commit('setIsFetchingScore', true)
 
     return api.get(`scores/${hash}`).then(({ data }) => {
@@ -44,9 +49,12 @@ const actions = {
     })
   },
 
-  fetchScores(context) {
+  fetchScores({ commit }) {
+    commit('setIsFetchingScores', true)
+
     return api.get(`scores`).then(({ data }) => {
-      context.commit('setScores', { scores: data.data })
+      commit('setScores', { scores: data.data })
+      commit('setIsFetchingScores', false)
     })
   },
 
