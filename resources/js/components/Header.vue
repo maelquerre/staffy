@@ -43,7 +43,13 @@
         :disabled="isUpdatingScore"
         @click="handleSaveScore"
       >
+        <Spinner
+          v-if="isUpdatingScore"
+          :size="18"
+        />
+
         <SaveIcon
+          v-else
           size="18"
         />
       </button>
@@ -109,9 +115,11 @@ import Dropdown from './Dropdown'
 import ScoreHeader from './ScoreHeader'
 
 import withScore from '../mixins/withScore'
+import Spinner from './Spinner'
 
 export default {
   components: {
+    Spinner,
     ScoreHeader,
     Dropdown,
     LogOutIcon,

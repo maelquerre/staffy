@@ -1,0 +1,116 @@
+@keyframes spinner {
+  0% {
+    opacity: .75;
+  }
+  50% {
+    opacity: .25;
+  }
+  100% {
+    opacity: .25;
+  }
+}
+
+.spinner {
+  --spinner-animation-duration: 1s;
+  --spinner-animation-factor: 12;
+
+  --spinner-blade-translate-y: -150%;
+  --spinner-blade-width: calc(var(--spinner-size) * .1);
+  --spinner-blade-height: calc(var(--spinner-size) * .25);
+  --spinner-blade-top: calc(var(--spinner-size) * .37);
+  --spinner-blade-left: calc(var(--spinner-size) * .445);
+
+  &.spinner-sm {
+    --spinner-size: 1.125rem;
+  }
+
+  &.spinner-md {
+    --spinner-size: 2.25rem;
+    --spinner-blade-width: calc(var(--spinner-size) * .1);
+  }
+
+  &.spinner-lg {
+    --spinner-size: 3rem;
+    --spinner-blade-width: calc(var(--spinner-size) * .08);
+  }
+}
+
+.spinner {
+  position: relative;
+  display: block;
+  vertical-align: middle;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+
+  .blade {
+    position: absolute;
+    top: var(--spinner-blade-top);
+    left: var(--spinner-blade-left);
+    width: var(--spinner-blade-width);
+    height: var(--spinner-blade-height);
+    background-color: currentColor;
+    border-radius: calc(var(--spinner-blade-width) * .5);
+    animation: spinner 1s linear infinite;
+    will-change: opacity;
+
+    &:nth-child(1) {
+      transform: rotate(30deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (1 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(2) {
+      transform: rotate(60deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (2 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(3) {
+      transform: rotate(90deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (3 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(4) {
+      transform: rotate(120deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (4 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(5) {
+      transform: rotate(150deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (5 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(6) {
+      transform: rotate(180deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (6 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(7) {
+      transform: rotate(210deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (7 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(8) {
+      transform: rotate(240deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (8 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(9) {
+      transform: rotate(270deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (9 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(10) {
+      transform: rotate(300deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (10 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(11) {
+      transform: rotate(330deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (11 - var(--spinner-animation-factor)));
+    }
+
+    &:nth-child(12) {
+      transform: rotate(360deg) translateY(var(--spinner-blade-translate-y));
+      animation-delay: calc(var(--spinner-animation-duration) / 12 * (12 - var(--spinner-animation-factor)));
+    }
+  }
+}

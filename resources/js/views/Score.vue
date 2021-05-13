@@ -1,10 +1,21 @@
 <template>
-  <div v-if="!scoreContent">
-    Loading
+  <div
+    v-if="isFetchingScore"
+    class="flex-grow flex items-center justify-center"
+  >
+    <div class="flex flex-col items-center">
+      <Spinner
+        size="md"
+      />
+
+      <div class="mt-4 text-gray-400 font-medium">
+        Loading editor
+      </div>
+    </div>
   </div>
 
   <div
-    v-else
+    v-else-if="scoreContent"
     class="flex-grow flex overflow-hidden"
   >
     <div class="w-1/2 relative">
@@ -23,22 +34,34 @@
       />
     </div>
   </div>
+
+  <div
+    v-else
+    class="flex-grow flex items-center justify-center"
+  >
+    <div class="flex flex-col items-center">
+      An error occurred with this score. Please try again later.
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 
 import Editor from '../components/Editor'
+import Spinner from '../components/Spinner'
 
 export default {
   components: {
     Editor,
+    Spinner,
   },
 
   computed: {
     ...mapState('score', {
       score: 'score',
       scoreContent: 'scoreContent',
+      isFetchingScore: 'isFetchingScore',
       isUpdatingScore: 'isUpdatingScore',
     }),
   },

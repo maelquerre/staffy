@@ -34,6 +34,10 @@ const mutations = {
       state.toasts.splice(index, 1)
     }
   },
+
+  setToasts(state, toasts) {
+    state.toasts = toasts
+  }
 }
 
 const actions = {
@@ -59,6 +63,7 @@ const actions = {
       id: Math.floor(Math.random() * 1000)
     }
 
+    context.commit('setToasts', [])
     context.commit('addToast', toast)
 
     setTimeout(() => {
