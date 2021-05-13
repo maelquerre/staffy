@@ -23,9 +23,6 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('api.auth.logout');
 });
 
-Route::get('scores', [ScoreController::class, 'index'])->name('api.scores.index');
-Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
-
 Route::prefix('scores/{score:hash}')->group(function () {
     Route::get('', [ScoreController::class, 'show'])->name('api.scores.show');
 });
@@ -33,7 +30,8 @@ Route::prefix('scores/{score:hash}')->group(function () {
 // Authenticated routes
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
+    Route::get('scores', [ScoreController::class, 'index'])->name('api.scores.index');
+    Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
 
     Route::prefix('scores/{score:hash}')->group(function () {
         Route::patch('', [ScoreController::class, 'update'])

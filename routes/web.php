@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [DefaultController::class, 'app'])->name('app');
-Route::get('login', [DefaultController::class, 'app'])->name('login');
-Route::get('register', [DefaultController::class, 'app'])->name('register');
+Route::get('', [DefaultController::class, 'root'])->name('root');
+
+Route::get('login', [DefaultController::class, 'app'])
+     ->middleware('guest')
+     ->name('login');
+Route::get('register', [DefaultController::class, 'app'])
+     ->middleware('guest')
+     ->name('register');
 
 Route::get('score/{score}', [DefaultController::class, 'app'])->name('score');
 

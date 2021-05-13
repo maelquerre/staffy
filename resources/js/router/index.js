@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
   const authRoutes = ['login', 'register']
 
   if (store.getters['auth/isAuthenticated'] && authRoutes.includes(to.name)) {
-    next({ name: 'dashboard' })
+    next({ name: 'scores' })
   } else {
     next()
   }
