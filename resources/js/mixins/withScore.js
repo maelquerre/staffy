@@ -2,14 +2,14 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState({
-      score: state => state.score.score,
+    ...mapState('score', {
+      score: 'score',
     }),
   },
 
   methods: {
-    ...mapActions({
-      newScore: 'score/newScore',
+    ...mapActions('score', {
+      newScore: 'newScore',
     }),
 
     createScore() {

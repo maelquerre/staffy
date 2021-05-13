@@ -1,0 +1,31 @@
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: theme('spacing.20');
+  transform: translateX(-50%);
+  width: fit-content;
+  padding: 0 theme('spacing.4');
+  font-size: theme('fontSize.sm');
+  z-index: theme('zIndex.toast');
+
+  @screen sm {
+    bottom: theme('spacing.4');
+  }
+}
+
+.toast {
+  padding: theme('spacing.2') theme('spacing.4');
+  color: theme('colors.white');
+  background-color: theme('colors.gray.900');
+  border-radius: theme('borderRadius.md');
+
+  .close {
+    margin-left: auto;
+    padding: theme('spacing.1');
+    border-radius: theme('borderRadius.DEFAULT');
+
+    &:hover {
+       background-color: rgba(255, 255, 255, .2);
+    }
+  }
+}

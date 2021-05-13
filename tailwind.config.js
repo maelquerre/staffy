@@ -30,7 +30,9 @@ module.exports = {
     extend: {
       zIndex: {
         dropdown: 1000,
+        notification: 1010,
         modal: 1020,
+        toast: 1030,
       },
     },
   },

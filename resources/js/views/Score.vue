@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 
 import Editor from '../components/Editor'
 
@@ -36,14 +36,15 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      score: state => state.score.score,
-      scoreContent: state => state.score.scoreContent,
-      isUpdatingScore: state => state.score.isUpdatingScore,
+    ...mapState('score', {
+      score: 'score',
+      scoreContent: 'scoreContent',
+      isUpdatingScore: 'isUpdatingScore',
     }),
   },
 
   created() {
+    this.setScore({ score: null })
     this.fetchScore({ hash: this.$route.params.hash })
   },
 
@@ -56,10 +57,18 @@ export default {
   },
 
   methods: {
-    ...mapActions({
-      fetchScore: 'score/fetchScore',
-      updateScore: 'score/updateScore',
-      updateScoreContent: 'score/updateScoreContent',
+    ...mapMutations('score', {
+      setScore: 'setScore',
+    }),
+
+    ...mapActions('alerts', {
+      toast: 'toast',
+    }),
+
+    ...mapActions('score', {
+      fetchScore: 'fetchScore',
+      updateScore: 'updateScore',
+      updateScoreContent: 'updateScoreContent',
     }),
 
     updateEditorValue(editorValue) {

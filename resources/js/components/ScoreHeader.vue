@@ -31,9 +31,9 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      score: state => state.score.score,
-      isFetchingScore: state => state.score.isFetchingScore,
+    ...mapState('score', {
+      score: 'score',
+      isFetchingScore: 'isFetchingScore',
     }),
   },
 

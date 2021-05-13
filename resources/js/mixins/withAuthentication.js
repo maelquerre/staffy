@@ -7,7 +7,11 @@ export default {
 
   methods: {
     onAuthenticationSuccess() {
-      this.$router.push({ name: 'scores' })
+      if (this.$route.query.redirect) {
+        this.$router.push({ path: this.$route.query.redirect })
+      } else {
+        this.$router.push({ name: 'scores' })
+      }
     },
 
     onAuthenticationError({ response }) {

@@ -7,19 +7,21 @@
 
     <main class="flex-grow flex flex-col">
       <RouterView />
+      <Toast />
     </main>
   </div>
 </template>
 
 <script>
-import Header from './components/Header'
 import { mapActions } from 'vuex'
-import Dropdown from './components/Dropdown'
+
+import Header from './components/Header'
+import Toast from './components/Toast'
 
 export default {
   components: {
-    Dropdown,
     Header,
+    Toast,
   },
 
   computed: {

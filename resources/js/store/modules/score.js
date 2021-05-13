@@ -4,7 +4,7 @@ import { randomString } from '../../core/utils'
 const state = {
   score: null,
   scores: [],
-  scoreContent: '',
+  scoreContent: null,
   isFetchingScore: false,
   isFetchingScores: false,
   isUpdatingScore: false,
@@ -15,7 +15,7 @@ const getters = {}
 const mutations = {
   setScore(state, { score }) {
     state.score = score
-    state.scoreContent = score.content
+    state.scoreContent = score ? score.content : null
   },
 
   setScores(state, { scores }) {
@@ -75,7 +75,7 @@ const actions = {
     return api.post(`scores`, score)
   },
 
-  updateScore({ commit, state }, { score, data }) {
+  updateScore({ commit, dispatch, state }, { score, data }) {
     if (state.isUpdatingScore === score.id) return
 
     commit('setIsUpdatingScore', score.id)
@@ -97,6 +97,13 @@ const actions = {
         })
 
         commit('setIsUpdatingScore', false)
+
+        const toast = { message: 'Score saved successfully.' }
+        dispatch('alerts/toast', toast, { root: true })
+      })
+      .catch(() => {
+        const toast = { message: 'There was an error saving your score. Please try again later.' }
+        dispatch('alerts/toast', toast, { root: true })
       })
   },
 

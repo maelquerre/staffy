@@ -9,8 +9,8 @@
           v-for="_ in 4"
           class="py-3 px-3 bg-white border border-gray-200 rounded-md shadow-sm "
         >
-          <div class="h-4 w-2/3 bg-gray-200 rounded animate-pulse"/>
-          <div class="h-3 w-1/2 bg-gray-200 rounded animate-pulse mt-2"/>
+          <div class="h-4 w-2/3 bg-gray-200 rounded animate-pulse" />
+          <div class="h-3 w-1/2 bg-gray-200 rounded animate-pulse mt-2" />
         </div>
       </template>
 
@@ -142,9 +142,9 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      scores: state => state.score.scores,
-      isFetchingScores: state => state.score.isFetchingScores,
+    ...mapState('score', {
+      scores: 'scores',
+      isFetchingScores: 'isFetchingScores',
     }),
   },
 
@@ -156,10 +156,10 @@ export default {
   },
 
   methods: {
-    ...mapActions({
-      fetchScores: 'score/fetchScores',
-      updateScore: 'score/updateScore',
-      deleteScore: 'score/deleteScore',
+    ...mapActions('score', {
+      fetchScores: 'fetchScores',
+      updateScore: 'updateScore',
+      deleteScore: 'deleteScore',
     }),
 
     requestScoreRenaming(score) {
