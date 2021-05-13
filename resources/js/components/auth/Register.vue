@@ -17,6 +17,7 @@
           class="input"
           placeholder="Name"
           type="text"
+          @keydown.enter="handleRegister"
         >
       </label>
 
@@ -38,6 +39,7 @@
           class="input"
           placeholder="Email address"
           type="email"
+          @keydown.enter="handleRegister"
         >
       </label>
 
@@ -59,6 +61,7 @@
           class="input"
           placeholder="Password"
           type="password"
+          @keydown.enter="handleRegister"
         >
       </label>
 

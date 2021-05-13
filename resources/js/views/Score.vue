@@ -8,7 +8,7 @@
         size="md"
       />
 
-      <div class="mt-4 text-gray-400 font-medium">
+      <div class="mt-4 text-gray-400">
         Loading editor
       </div>
     </div>

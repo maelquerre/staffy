@@ -1,16 +1,12 @@
 .toasts {
   position: fixed;
   left: 50%;
-  bottom: theme('spacing.20');
+  bottom: theme('spacing.4');
   transform: translateX(-50%);
   width: fit-content;
   padding: 0 theme('spacing.4');
   font-size: theme('fontSize.sm');
   z-index: theme('zIndex.toast');
-
-  @screen sm {
-    bottom: theme('spacing.4');
-  }
 }
 
 .toast {

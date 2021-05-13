@@ -31,7 +31,7 @@
       >
         <div
           v-if="isMounted"
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          class="inline-block align-bottom w-full bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg"
         >
           <div class="px-4 pt-5 pb-4 sm:p-6 text-sm bg-white">
             <div
