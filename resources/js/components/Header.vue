@@ -24,7 +24,7 @@
 
     <div class="w-2/4 text-center text-sm font-medium">
       <ScoreHeader
-        v-if="$route.name === 'score'"
+        v-if="$route.name === 'score' && score"
       />
 
       <template v-else-if="$route.name === 'scores'">
@@ -40,7 +40,7 @@
       <button
         v-if="$route.name === 'score'"
         class="btn btn-default p-1"
-        :disabled="isUpdatingScore"
+        :disabled="isUpdatingScore || !score"
         @click="handleSaveScore"
       >
         <Spinner

@@ -37,10 +37,16 @@
 
   <div
     v-else
-    class="flex-grow flex items-center justify-center"
+    class="flex-grow flex items-center justify-center px-4"
   >
-    <div class="flex flex-col items-center">
-      An error occurred with this score. Please try again later.
+    <div class="text-center">
+      <div class="mb-4 text-5xl font-semibold">
+        404
+      </div>
+
+      <div>
+        The requested score doesn't exist or you don't have access to it.
+      </div>
     </div>
   </div>
 </template>

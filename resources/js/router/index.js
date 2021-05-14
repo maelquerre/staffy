@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Auth from '../views/Auth.vue'
+import NotFound from '../views/NotFound.vue'
 import Score from '../views/Score.vue'
 import Scores from '../views/Scores.vue'
 
@@ -31,6 +32,10 @@ const routes = [
     path: '/score/:hash',
     name: 'score',
     component: Score,
+  },
+  {
+    path: '*',
+    component: NotFound,
   },
 ]
 

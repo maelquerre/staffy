@@ -47,19 +47,27 @@ const actions = {
   fetchScore({ commit }, { hash }) {
     commit('setIsFetchingScore', true)
 
-    return api.get(`scores/${hash}`).then(({ data }) => {
-      commit('setScore', { score: data.data })
-      commit('setIsFetchingScore', false)
-    })
+    return api.get(`scores/${hash}`)
+      .then(({ data }) => {
+        commit('setScore', { score: data.data })
+        commit('setIsFetchingScore', false)
+      })
+      .catch(() => {
+        commit('setIsFetchingScore', false)
+      })
   },
 
   fetchScores({ commit }) {
     commit('setIsFetchingScores', true)
 
-    return api.get(`scores`).then(({ data }) => {
-      commit('setScores', { scores: data.data })
-      commit('setIsFetchingScores', false)
-    })
+    return api.get(`scores`)
+      .then(({ data }) => {
+        commit('setScores', { scores: data.data })
+        commit('setIsFetchingScores', false)
+      })
+      .catch(() => {
+        commit('setIsFetchingScores', false)
+      })
   },
 
   newScore(context) {

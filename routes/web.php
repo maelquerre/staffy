@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [DefaultController::class, 'root'])->name('root');
+Route::get('', [AppController::class, 'root'])->name('root');
 
-Route::get('login', [DefaultController::class, 'app'])
+Route::get('login', [AppController::class, 'app'])
      ->middleware('guest')
      ->name('login');
-Route::get('register', [DefaultController::class, 'app'])
+Route::get('register', [AppController::class, 'app'])
      ->middleware('guest')
      ->name('register');
 
-Route::get('score/{score}', [DefaultController::class, 'app'])->name('score');
-
 Route::middleware('auth')->group(function () {
-    Route::get('scores', [DefaultController::class, 'app'])->name('scores');
+    Route::get('scores', [AppController::class, 'app'])->name('scores');
 });
 
-Route::fallback(fn() => view('404'));
+Route::get('/{any}', [AppController::class, 'app'])
+    ->where('any', '.*')
+    ->name('app');
