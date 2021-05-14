@@ -29,5 +29,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/{any}', [AppController::class, 'app'])
-    ->where('any', '.*')
-    ->name('app');
+     ->where('any', '.*')
+     ->name('app');
