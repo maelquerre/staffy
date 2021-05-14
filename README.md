@@ -25,16 +25,6 @@ When using Laravel Sail, the application is executing within a Docker container 
 computer. Sail provides a convenient way to run various commands against your application such as arbitrary PHP
 commands, Artisan commands, Composer commands, and Node / NPM commands.
 
-### Installation
-
-```
-cp .env.dist .env
-
-sail composer install
-
-sail npm install
-```
-
 ### Starting & Stopping Sail
 
 You may wish to configure a Bash alias that allows you to execute Sail's commands more easily:
@@ -56,8 +46,27 @@ are running in the background, you may use the down command:
 sail down
 ```
 
+### Installation
+
+```
+cp .env.dist .env
+
+sail composer install
+
+sail npm install
+```
+
+
 ### Migrating database
 
 ```
 sail artisan migrate
+```
+
+### Launch app
+
+Watch JS and CSS assets:
+
+```
+npm run watch
 ```
