@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 import Editor from '../components/Editor'
 import Spinner from '../components/Spinner'
@@ -64,6 +64,10 @@ export default {
       isFetchingScore: 'isFetchingScore',
       isUpdatingScore: 'isUpdatingScore',
     }),
+
+    ...mapGetters('score', {
+      hasScoreContentChanged: 'hasScoreContentChanged',
+    }),
   },
 
   created() {
@@ -77,6 +81,14 @@ export default {
 
   beforeDestroy() {
     document.removeEventListener('keydown', this.saveScoreListener)
+  },
+
+  beforeRouteLeave(tp, from, next) {
+    if (this.hasScoreContentChanged) {
+      window.confirm('Changes you made may not be saved. Leave anyway?') && next()
+    } else {
+      next()
+    }
   },
 
   methods: {

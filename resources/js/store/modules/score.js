@@ -10,7 +10,11 @@ const state = {
   isUpdatingScore: false,
 }
 
-const getters = {}
+const getters = {
+  hasScoreContentChanged(state) {
+    return state.scoreContent !== state.score.content
+  },
+}
 
 const mutations = {
   setScore(state, { score }) {
@@ -100,6 +104,8 @@ const actions = {
 
         const toast = { message: 'Score saved successfully.' }
         dispatch('alerts/toast', toast, { root: true })
+
+        window.onbeforeunload = null
       })
       .catch(() => {
         const toast = { message: 'There was an error saving your score. Please try again later.' }
@@ -118,6 +124,7 @@ const actions = {
 
   updateScoreContent(context, { content }) {
     context.commit('setScoreContent', { content })
+    window.onbeforeunload = () => 'Changes may not be saved. Leave anyway?'
   },
 }
 
