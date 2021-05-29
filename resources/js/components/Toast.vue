@@ -18,7 +18,7 @@
         <button
           v-if="toast.dismissible"
           class="close"
-          @click="dismissToast"
+          @click="dismissToast({ id: toast.id })"
         >
           <XIcon
             size="16"
@@ -34,6 +34,10 @@ import { mapActions, mapState } from 'vuex'
 import { XIcon } from 'vue-feather-icons'
 
 export default {
+  components: {
+    XIcon,
+  },
+
   computed: {
     ...mapState('alerts', {
       toasts: 'toasts'

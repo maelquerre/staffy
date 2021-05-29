@@ -66,9 +66,11 @@ const actions = {
     context.commit('setToasts', [])
     context.commit('addToast', toast)
 
-    setTimeout(() => {
-      context.commit('removeToast', { id: toast.id })
-    }, 2000)
+    if (!toast.dismissible) {
+      setTimeout(() => {
+        context.commit('removeToast', { id: toast.id })
+      }, 2000)
+    }
   },
 
   dismissToast(context, { id }) {

@@ -5,7 +5,7 @@
       class="flex-shrink-0"
     />
 
-    <main class="flex-grow flex flex-col">
+    <main class="flex-grow flex flex-col overflow-hidden">
       <RouterView />
       <Toast />
     </main>

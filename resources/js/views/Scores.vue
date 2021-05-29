@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isFetchingScores || scores.length > 0"
-    class="flex-grow p-4 sm:p-8"
+    class="flex-grow p-4 sm:p-8 overflow-auto"
   >
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
       <template v-if="isFetchingScores">
@@ -81,7 +81,7 @@
 
   <div
     v-else
-    class="flex-grow flex items-center justify-center"
+    class="flex-grow flex items-center justify-center overflow-auto"
   >
     <div class="flex flex-col items-center">
       <div class="text-center text-sm text-gray-400">
@@ -150,12 +150,16 @@ export default {
 
   created() {
     this.fetchScores()
-      .catch((response) => {
-        console.log(response)
+      .catch(() => {
+        this.toast({ message: 'An error occurred. Please try again later.' })
       })
   },
 
   methods: {
+    ...mapActions('alerts', {
+      toast: 'toast',
+    }),
+
     ...mapActions('score', {
       fetchScores: 'fetchScores',
       updateScore: 'updateScore',

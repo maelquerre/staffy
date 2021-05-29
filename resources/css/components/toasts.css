@@ -10,13 +10,16 @@
 }
 
 .toast {
+  display: flex;
+  align-items: flex-start;
   padding: theme('spacing.2') theme('spacing.4');
   color: theme('colors.white');
   background-color: theme('colors.gray.900');
   border-radius: theme('borderRadius.md');
 
   .close {
-    margin-left: auto;
+    margin-left: theme('spacing.2');
+    margin-right: calc(theme('spacing.2') * -1);
     padding: theme('spacing.1');
     border-radius: theme('borderRadius.DEFAULT');
 
