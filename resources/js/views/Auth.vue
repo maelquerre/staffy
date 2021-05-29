@@ -35,7 +35,7 @@
             class="text-red-500 underline"
             :to="{ name: 'login' }"
           >
-            Login
+            Log in
           </RouterLink>
         </template>
       </div>

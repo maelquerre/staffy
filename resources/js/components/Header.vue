@@ -39,8 +39,9 @@
     <div class="w-1/4 flex items-center justify-end space-x-4">
       <button
         v-if="$route.name === 'score'"
-        class="btn btn-default p-1"
+        class="btn btn-text p-1"
         :disabled="isUpdatingScore || !score"
+        title="Save score"
         @click="handleSaveScore"
       >
         <Spinner
@@ -94,7 +95,7 @@
                 class="dropdown-item"
                 @click="handleLogout"
               >
-                Logout
+                Log out
                 <LogOutIcon
                   size="16"
                 />

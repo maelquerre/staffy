@@ -80,7 +80,7 @@
         class="btn btn-default text-sm w-full mt-6 py-2 px-3"
         @click="handleRegister"
       >
-        Register
+        Sign up
       </button>
     </div>
   </div>
