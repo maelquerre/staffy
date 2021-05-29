@@ -1,10 +1,13 @@
 import api from '../../service/api'
 import { randomString } from '../../core/utils'
+import { jsPDF } from 'jspdf'
+import 'svg2pdf.js'
 
 const state = {
   score: null,
   scores: [],
   scoreContent: null,
+  isDownloadingScore: false,
   isFetchingScore: false,
   isFetchingScores: false,
   isUpdatingScore: false,
@@ -85,6 +88,23 @@ const actions = {
 
   storeScore(context, { score }) {
     return api.post(`scores`, score)
+  },
+
+  downloadScore(context) {
+    const doc = new jsPDF()
+    const svg = document.querySelector('#preview').querySelector('svg')
+
+    doc
+      .svg(svg, {
+        x: 0,
+        y: 0,
+        width: svg.offsetWidth,
+        height: svg.offsetHeight
+      })
+      .then(() => {
+        // save the created pdf
+        doc.save(`${context.state.score.title}.pdf`)
+      })
   },
 
   updateScore({ commit, dispatch, state }, { score, data }) {

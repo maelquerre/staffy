@@ -36,24 +36,39 @@
       </template>
     </div>
 
-    <div class="w-1/4 flex items-center justify-end space-x-4">
-      <button
+    <div class="w-1/4 flex items-center justify-end">
+      <div
         v-if="$route.name === 'score'"
-        class="btn btn-text p-1"
-        :disabled="isUpdatingScore || !score"
-        title="Save score"
-        @click="handleSaveScore"
+        class="flex items-center mr-4 space-x-2"
       >
-        <Spinner
-          v-if="isUpdatingScore"
-          :size="18"
-        />
+        <button
+          class="btn btn-text p-1"
+          :disabled="isUpdatingScore || !score"
+          title="Save score"
+          @click="handleSaveScore"
+        >
+          <Spinner
+            v-if="isUpdatingScore"
+            :size="18"
+          />
 
-        <SaveIcon
-          v-else
-          size="18"
-        />
-      </button>
+          <SaveIcon
+            v-else
+            size="18"
+          />
+        </button>
+
+        <button
+          class="btn btn-text p-1"
+          :disabled="isDownloadingScore || !score"
+          title="Download score"
+          @click="handleDownloadScore"
+        >
+          <DownloadIcon
+            size="18"
+          />
+        </button>
+      </div>
 
       <div class="flex items-center space-x-4">
         <template v-if="!isAuthenticated">
@@ -111,7 +126,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 
-import { LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
+import { DownloadIcon, LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
 import Dropdown from './Dropdown'
 import ScoreHeader from './ScoreHeader'
 
@@ -120,9 +135,10 @@ import Spinner from './Spinner'
 
 export default {
   components: {
-    Spinner,
-    ScoreHeader,
     Dropdown,
+    ScoreHeader,
+    Spinner,
+    DownloadIcon,
     LogOutIcon,
     MenuIcon,
     PlusIcon,
@@ -138,6 +154,7 @@ export default {
       user: state => state.auth.user,
       scoreContent: state => state.score.scoreContent,
       isUpdatingScore: state => state.score.isUpdatingScore,
+      isDownloadingScore: state => state.score.isDownloadingScore,
     }),
 
     ...mapGetters({
@@ -148,8 +165,13 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
+      downloadScore: 'score/downloadScore',
       updateScore: 'score/updateScore',
     }),
+
+    handleDownloadScore() {
+      this.downloadScore({ score: this.score })
+    },
 
     handleSaveScore() {
       const data = { content: this.scoreContent }
