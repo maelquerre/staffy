@@ -38,7 +38,7 @@ class ScoreController extends Controller
     public function store(Request $request, Authenticatable $user)
     {
         $validated = $request->validate([
-            'hash'    => 'required|string|unique:scores,hash',
+            'hash'    => 'required|string|size:8|unique:scores,hash',
             'title'   => 'required|string',
             'content' => 'string',
         ]);
