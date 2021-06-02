@@ -15,18 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Regular routes
+
 Route::get('', [AppController::class, 'root'])->name('root');
 
 Route::get('login', [AppController::class, 'app'])
      ->middleware('guest')
      ->name('login');
+
 Route::get('register', [AppController::class, 'app'])
      ->middleware('guest')
      ->name('register');
 
+Route::get('score/{score:hash}', [AppController::class, 'app'])->name('score');
+
+
+// Authenticated routes
+
 Route::middleware('auth')->group(function () {
     Route::get('scores', [AppController::class, 'app'])->name('scores');
 });
+
+
+// Any other route, they'll be handled by the client-side router
 
 Route::get('/{any}', [AppController::class, 'app'])
      ->where('any', '.*')

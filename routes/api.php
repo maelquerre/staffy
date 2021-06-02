@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Authentication routes
+
 Route::prefix('auth')->group(function () {
     Route::get('authenticate', [AuthController::class, 'authenticate'])->name('api.auth.authenticate');
     Route::post('login', [AuthController::class, 'login'])->name('api.auth.login');
@@ -23,9 +25,13 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('api.auth.logout');
 });
 
+
+// Regular routes
+
 Route::prefix('scores/{score:hash}')->group(function () {
     Route::get('', [ScoreController::class, 'show'])->name('api.scores.show');
 });
+
 
 // Authenticated routes
 
@@ -37,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('', [ScoreController::class, 'update'])
              ->middleware('can:update,score')
              ->name('api.scores.update');
+
         Route::delete('', [ScoreController::class, 'delete'])
              ->middleware('can:delete,score')
              ->name('api.scores.delete');

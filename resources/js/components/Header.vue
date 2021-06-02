@@ -68,6 +68,17 @@
             size="18"
           />
         </button>
+
+        <button
+          class="btn btn-text p-1"
+          :disabled="!score"
+          title="Copy link"
+          @click="handleCopyLink"
+        >
+          <LinkIcon
+            size="18"
+          />
+        </button>
       </div>
 
       <div class="flex items-center space-x-4">
@@ -126,7 +137,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 
-import { DownloadIcon, LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
+import { DownloadIcon, LinkIcon, LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
 import Dropdown from './Dropdown'
 import ScoreHeader from './ScoreHeader'
 
@@ -139,6 +150,7 @@ export default {
     ScoreHeader,
     Spinner,
     DownloadIcon,
+    LinkIcon,
     LogOutIcon,
     MenuIcon,
     PlusIcon,
@@ -165,12 +177,36 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
+      toast: 'alerts/toast',
       downloadScore: 'score/downloadScore',
       updateScore: 'score/updateScore',
     }),
 
     handleDownloadScore() {
       this.downloadScore({ score: this.score })
+    },
+
+    handleCopyLink() {
+      let input = document.createElement('input')
+      input.value = this.score.link
+
+      // Avoid scrolling to bottom
+      input.style.top = '0'
+      input.style.left = '0'
+      input.style.position = 'fixed'
+
+      document.body.appendChild(input)
+      input.focus()
+      input.select()
+
+      try {
+        const successful = document.execCommand('copy')
+        successful && this.toast({ message: 'Score link copied' })
+      } catch {
+        this.toast({ message: 'There was an error copying the link of this score. Please try again later.' })
+      }
+
+      document.body.removeChild(input)
     },
 
     handleSaveScore() {

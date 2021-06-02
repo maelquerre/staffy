@@ -39,15 +39,9 @@
     v-else
     class="flex-grow flex items-center justify-center px-4"
   >
-    <div class="text-center">
-      <div class="mb-4 text-5xl font-semibold">
-        404
-      </div>
-
-      <div>
-        The requested score doesn't exist or you don't have access to it.
-      </div>
-    </div>
+    <NotFound
+      message="The requested score doesn't exist or you don't have access to it."
+    />
   </div>
 </template>
 
@@ -55,11 +49,13 @@
 import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 import Editor from '../components/Editor'
+import NotFound from './NotFound'
 import Spinner from '../components/Spinner'
 
 export default {
   components: {
     Editor,
+    NotFound,
     Spinner,
   },
 

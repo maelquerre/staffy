@@ -58,10 +58,7 @@ const actions = {
   },
 
   toast(context, toast) {
-    toast = {
-      ...toast,
-      id: Math.floor(Math.random() * 1000)
-    }
+    toast.id = Math.floor(Math.random() * 1000)
 
     context.commit('setToasts', [])
     context.commit('addToast', toast)

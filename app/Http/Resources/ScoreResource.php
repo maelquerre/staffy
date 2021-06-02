@@ -20,6 +20,7 @@ class ScoreResource extends JsonResource
             'hash'       => $this->hash,
             'title'      => $this->title,
             'content'    => $this->content,
+            'link'       => $this->link,
             'created_at' => $this->created_at,
         ];
     }

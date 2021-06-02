@@ -20,4 +20,9 @@ class Score extends Model
         'title',
         'content',
     ];
+
+    public function getLinkAttribute()
+    {
+        return route('score', ['score' => $this->hash]);
+    }
 }
