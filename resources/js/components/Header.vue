@@ -67,7 +67,7 @@
 
         <button
           class="btn btn-text p-1"
-          :disabled="isDownloadingScore || !score"
+          :disabled="!score"
           title="Download score"
           @click="handleDownloadScore"
         >
@@ -173,7 +173,6 @@ export default {
       user: state => state.auth.user,
       scoreContent: state => state.score.scoreContent,
       isUpdatingScore: state => state.score.isUpdatingScore,
-      isDownloadingScore: state => state.score.isDownloadingScore,
     }),
 
     ...mapGetters({

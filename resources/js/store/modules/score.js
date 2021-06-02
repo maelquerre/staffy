@@ -7,7 +7,6 @@ const state = {
   score: null,
   scores: [],
   scoreContent: null,
-  isDownloadingScore: false,
   isFetchingScore: false,
   isFetchingScores: false,
   isUpdatingScore: false,
