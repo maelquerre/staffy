@@ -136,6 +136,8 @@ const actions = {
         window.onbeforeunload = null
       })
       .catch(() => {
+        commit('setIsUpdatingScore', false)
+
         const toast = { message: 'There was an error saving your score. Please try again later.' }
         dispatch('alerts/toast', toast, { root: true })
       })
