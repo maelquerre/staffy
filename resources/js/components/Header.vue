@@ -1,31 +1,38 @@
 <template>
   <header class="flex items-center justify-between py-2 px-4 border-b border-gray-200 shadow-sm relative z-10">
     <div class="w-1/4 flex items-center space-x-2">
-      <RouterLink
-        class="btn btn-text p-1"
-        title="Show scores"
-        :to="{ name: 'scores' }"
-      >
-        <MenuIcon
-          size="18"
-        />
-      </RouterLink>
+      <template v-if="isAuthenticated">
+        <RouterLink
+          class="btn btn-text p-1"
+          title="Show scores"
+          :to="{ name: 'scores' }"
+        >
+          <MenuIcon
+            size="18"
+          />
+        </RouterLink>
 
-      <button
-        class="btn btn-text p-1"
-        title="New score"
-        @click="createScore"
-      >
-        <PlusIcon
-          size="18"
-        />
-      </button>
+        <button
+          class="btn btn-text p-1"
+          title="New score"
+          @click="createScore"
+        >
+          <PlusIcon
+            size="18"
+          />
+        </button>
+      </template>
     </div>
 
     <div class="w-2/4 text-center text-sm font-medium">
-      <ScoreHeader
-        v-if="$route.name === 'score' && score"
-      />
+      <template v-if="$route.name === 'score' && score">
+        <ScoreHeader
+          v-if="isAuthenticated"
+        />
+        <template v-else>
+          {{ score.title }}
+        </template>
+      </template>
 
       <template v-else-if="$route.name === 'scores'">
         Recent scores
@@ -38,7 +45,7 @@
 
     <div class="w-1/4 flex items-center justify-end">
       <div
-        v-if="$route.name === 'score'"
+        v-if="$route.name === 'score' && isAuthenticated"
         class="flex items-center mr-4 space-x-2"
       >
         <button
