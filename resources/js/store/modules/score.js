@@ -101,7 +101,6 @@ const actions = {
         height: svg.offsetHeight
       })
       .then(() => {
-        // save the created pdf
         doc.save(`${context.state.score.title}.pdf`)
       })
   },
