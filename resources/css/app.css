@@ -8,5 +8,6 @@
 @import "./components/input.css";
 @import "./components/spinner.css";
 @import "./components/toasts.css";
+@import "./components/typography.css";
 
 @import "tailwindcss/utilities";

@@ -114,7 +114,7 @@
             </template>
 
             <template #items>
-              <div class="flex items-center py-1 px-3">
+              <div class="flex items-center py-2 px-3">
                 <div class="flex-shrink-0 flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-accent border border-accent-light rounded-full">
                   {{ user.name[0] }}
                 </div>
@@ -123,6 +123,16 @@
                   <div class="text-gray-500">{{ user.email }}</div>
                 </div>
               </div>
+
+              <RouterLink
+                class="dropdown-item"
+                :to="{ name: 'about' }"
+              >
+                About
+                <HelpCircleIcon
+                  size="16"
+                />
+              </RouterLink>
 
               <RouterLink
                 class="dropdown-item"
@@ -156,6 +166,7 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 
 import {
   DownloadIcon,
+  HelpCircleIcon,
   LinkIcon,
   LogOutIcon,
   MenuIcon,
@@ -175,6 +186,7 @@ export default {
     ScoreHeader,
     Spinner,
     DownloadIcon,
+    HelpCircleIcon,
     LinkIcon,
     LogOutIcon,
     MenuIcon,

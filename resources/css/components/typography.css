@@ -1,0 +1,5 @@
+.prose {
+  a {
+    color: theme('colors.red.500');
+  }
+}

@@ -4,9 +4,10 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Auth from '../views/Auth.vue'
-import General from '../views/settings/General'
+import General from '../views/settings/General.vue'
+import About from '../views/About.vue'
 import NotFound from '../views/NotFound.vue'
-import Password from '../views/settings/Password'
+import Password from '../views/settings/Password.vue'
 import Settings from '../views/settings/Settings.vue'
 import Score from '../views/Score.vue'
 import Scores from '../views/Scores.vue'
@@ -35,6 +36,11 @@ const routes = [
     path: '/score/:hash',
     name: 'score',
     component: Score,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About,
   },
   {
     path: '/settings',
