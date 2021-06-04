@@ -121,6 +121,14 @@ export default {
       toast: 'alerts/toast',
     }),
 
+    onUpdateError({ response }) {
+      if (response.data.errors) {
+        this.toast({
+          message: Object.values(response.data.errors).map((error) => `${error}`).join(' ')
+        })
+      }
+    },
+
     editName() {
       if (this.name === this.user.name) {
         this.isEditingName = false
@@ -129,11 +137,10 @@ export default {
 
       return this.updateUser({ name: this.name })
         .then(() => {
+          this.isEditingName = false
           this.toast({ message: 'Name updated successfully' })
         })
-        .finally(() => {
-          this.isEditingName = false
-        })
+        .catch(this.onUpdateError)
     },
 
     editEmail() {
@@ -144,11 +151,10 @@ export default {
 
       return this.updateUser({ email: this.email })
         .then(() => {
+          this.isEditingEmail = false
           this.toast({ message: 'Email updated successfully' })
         })
-        .finally(() => {
-          this.isEditingEmail = false
-        })
+        .catch(this.onUpdateError)
     },
   },
 }
