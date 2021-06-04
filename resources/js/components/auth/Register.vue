@@ -14,7 +14,7 @@
         <input
           id="name"
           v-model="name"
-          class="input"
+          class="input-default"
           placeholder="Name"
           type="text"
           @keydown.enter="handleRegister"
@@ -36,7 +36,7 @@
         <input
           id="email"
           v-model="email"
-          class="input"
+          class="input-default"
           placeholder="Email address"
           type="email"
           @keydown.enter="handleRegister"
@@ -58,7 +58,7 @@
         <input
           id="password"
           v-model="password"
-          class="input"
+          class="input-default"
           placeholder="Password"
           type="password"
           @keydown.enter="handleRegister"

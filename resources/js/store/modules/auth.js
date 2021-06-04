@@ -53,6 +53,13 @@ const actions = {
         context.commit('setUser', data.data)
       })
   },
+
+  updatePassword(context, data) {
+    return api.patch('user/password', data)
+      .then(({ data }) => {
+        context.commit('setUser', data.data)
+      })
+  },
 }
 
 export default { state, getters, mutations, actions, namespaced: true }

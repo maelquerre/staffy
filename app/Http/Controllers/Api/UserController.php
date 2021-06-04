@@ -45,8 +45,8 @@ class UserController extends Controller
     public function updatePassword(Request $request, Authenticatable $user)
     {
         $validated = $request->validate([
-            'current_password' => 'required|password:sanctum',
-            'new_password'     => 'required|string',
+            'current_password' => 'required|string|password:sanctum',
+            'new_password'     => 'required|string|confirmed',
         ]);
 
         $user->password = Hash::make($validated['new_password']);

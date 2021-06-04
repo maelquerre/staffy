@@ -1,12 +1,24 @@
-.input {
+[class*="input-"] {
   display: block;
   width: 100%;
   appearance: none;
+  font-size: theme('fontSize.base');
+  border-radius: theme('borderRadius.md');
+
+  &:focus {
+    outline: none;
+  }
+
+  @screen sm {
+    font-size: theme('fontSize.sm');
+  }
+}
+
+.input-default {
   padding: theme('spacing.2') theme('spacing.3');
   color: theme('colors.gray.900');
   background-color: theme('colors.white');
   border: 1px solid theme('colors.gray.200');
-  border-radius: theme('borderRadius.md');
   box-shadow: theme('boxShadow.sm');
 
   &::placeholder {
@@ -15,10 +27,16 @@
 
   &:focus {
     border-color: theme('colors.gray.500');
-    outline: none;
   }
+}
 
-  @screen sm {
-    font-size: theme('fontSize.sm')
+.input-text {
+  padding: theme('spacing.1') theme('spacing.3');
+  color: theme('colors.gray.900');
+  background-color: theme('colors.gray.100');
+  border-radius: theme('borderRadius.md');
+
+  &::placeholder {
+    color: theme('colors.gray.500');
   }
 }

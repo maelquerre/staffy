@@ -15,7 +15,7 @@
             v-if="isEditingName"
             v-model="name"
             v-focus
-            class="-my-1 -mx-2 py-1 px-2 rounded bg-gray-100 focus:outline-none"
+            class="input-text -my-1 -mx-3"
             type="text"
           >
           <template v-else>
@@ -49,7 +49,7 @@
             v-if="isEditingEmail"
             v-model="email"
             v-focus
-            class="-my-1 -mx-2 py-1 px-2 rounded bg-gray-100 focus:outline-none"
+            class="input-text -my-1 -mx-3"
             type="text"
           >
           <template v-else>
