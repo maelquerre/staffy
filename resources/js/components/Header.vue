@@ -126,7 +126,7 @@
 
               <RouterLink
                 class="dropdown-item"
-                :to="{ name: 'settings' }"
+                :to="{ name: 'general-settings' }"
               >
                 Settings
                 <SettingsIcon
