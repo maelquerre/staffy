@@ -2,6 +2,8 @@
 
 A web app for writing sheet music online.
 
+You can see the app live at [staffy.maelquerre.co](http://staffy.maelquerre.co). Due to the Heroku [dynos](https://www.heroku.com/dynos) system, the app can be slow to load on the first time. It's because Heroku puts the app to sleep after 30 minutes of inactivity, and it takes time to wake the dynos up again.
+
 ## Requirements
 
 You must have Docker installed on your machine.
