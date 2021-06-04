@@ -5,6 +5,7 @@ import store from '../store'
 
 import Auth from '../views/Auth.vue'
 import NotFound from '../views/NotFound.vue'
+import Settings from '../views/Settings.vue'
 import Score from '../views/Score.vue'
 import Scores from '../views/Scores.vue'
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/score/:hash',
     name: 'score',
     component: Score,
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: Settings,
   },
   {
     path: '*',

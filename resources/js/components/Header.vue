@@ -114,8 +114,8 @@
             </template>
 
             <template #items>
-              <div class="flex items-center py-2 px-4">
-                <div class="flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-accent border border-accent-light rounded-full">
+              <div class="flex items-center py-1 px-3">
+                <div class="flex-shrink-0 flex items-center justify-center w-6 h-6 text-xs font-medium text-white bg-accent border border-accent-light rounded-full">
                   {{ user.name[0] }}
                 </div>
                 <div class="ml-2 text-xs">
@@ -124,8 +124,18 @@
                 </div>
               </div>
 
-              <button
+              <RouterLink
                 class="dropdown-item"
+                :to="{ name: 'settings' }"
+              >
+                Settings
+                <SettingsIcon
+                  size="16"
+                />
+              </RouterLink>
+
+              <button
+                class="dropdown-item text-red-500"
                 @click="handleLogout"
               >
                 Log out
@@ -144,7 +154,15 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 
-import { DownloadIcon, LinkIcon, LogOutIcon, MenuIcon, PlusIcon, SaveIcon } from 'vue-feather-icons'
+import {
+  DownloadIcon,
+  LinkIcon,
+  LogOutIcon,
+  MenuIcon,
+  PlusIcon,
+  SaveIcon,
+  SettingsIcon,
+} from 'vue-feather-icons'
 import Dropdown from './Dropdown'
 import ScoreHeader from './ScoreHeader'
 
@@ -162,6 +180,7 @@ export default {
     MenuIcon,
     PlusIcon,
     SaveIcon,
+    SettingsIcon,
   },
 
   mixins: [

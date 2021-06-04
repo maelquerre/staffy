@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ScoreController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,8 +37,15 @@ Route::prefix('scores/{score:hash}')->group(function () {
 // Authenticated routes
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('scores', [ScoreController::class, 'index'])->name('api.scores.index');
-    Route::post('scores', [ScoreController::class, 'store'])->name('api.scores.store');
+    Route::prefix('user')->group(function () {
+        Route::patch('', [UserController::class, 'update'])->name('api.user.update');
+        Route::patch('password', [UserController::class, 'updatePassword'])->name('api.user.password');
+    });
+
+    Route::prefix('scores')->group(function () {
+        Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
+        Route::post('', [ScoreController::class, 'store'])->name('api.scores.store');
+    });
 
     Route::prefix('scores/{score:hash}')->group(function () {
         Route::patch('', [ScoreController::class, 'update'])

@@ -15,7 +15,7 @@
   </div>
 
   <div
-    v-else-if="scoreContent"
+    v-else-if="scoreContent !== null"
     class="flex-grow flex overflow-hidden"
   >
     <div class="w-1/2 relative">

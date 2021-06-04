@@ -11,7 +11,7 @@ const getters = {
 }
 
 const mutations = {
-  setUser(state, { user }) {
+  setUser(state, user) {
     state.user = user
   },
 }
@@ -20,7 +20,7 @@ const actions = {
   authenticate(context) {
     return api.get('auth/authenticate')
       .then(({ data }) => {
-        context.commit('setUser', { user: data.data })
+        context.commit('setUser', data.data)
       })
   },
 
@@ -29,21 +29,28 @@ const actions = {
 
     return api.post('auth/login', data)
       .then(({ data }) => {
-        context.commit('setUser', { user: data.data })
+        context.commit('setUser', data.data)
       })
   },
 
   register(context, data) {
     return api.post('auth/register', data)
       .then(({ data }) => {
-        context.commit('setUser', { user: data.data })
+        context.commit('setUser', data.data)
       })
   },
 
   logout(context) {
     return api.post('auth/logout')
       .then(() => {
-        context.commit('setUser', { user: null })
+        context.commit('setUser', null)
+      })
+  },
+
+  updateUser(context, data) {
+    return api.patch('user', data)
+      .then(({ data }) => {
+        context.commit('setUser', data.data)
       })
   },
 }

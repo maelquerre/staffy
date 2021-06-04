@@ -29,7 +29,9 @@
         role="menu"
         tabindex="-1"
       >
-        <slot name="items" />
+        <div @click="isOpen = false">
+          <slot name="items" />
+        </div>
       </div>
     </transition>
   </div>
