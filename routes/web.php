@@ -32,7 +32,7 @@ Route::get('score/{score:hash}', [AppController::class, 'app'])->name('score');
 
 // Authenticated routes
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('scores', [AppController::class, 'app'])->name('scores');
 });
 

@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Auth from '../views/Auth.vue'
+import General from '../views/settings/General'
 import NotFound from '../views/NotFound.vue'
-import Settings from '../views/Settings.vue'
+import Password from '../views/settings/Password'
+import Settings from '../views/settings/Settings.vue'
 import Score from '../views/Score.vue'
 import Scores from '../views/Scores.vue'
 
@@ -38,6 +40,18 @@ const routes = [
     path: '/settings',
     name: 'settings',
     component: Settings,
+    children: [
+      {
+        path: '',
+        name: 'general-settings',
+        component: General,
+      },
+      {
+        path: 'password',
+        name: 'password-settings',
+        component: Password,
+      }
+    ]
   },
   {
     path: '*',
