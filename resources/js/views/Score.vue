@@ -73,7 +73,7 @@ export default {
   },
 
   created() {
-    this.setScore({ score: null })
+    this.setScore(null)
     this.fetchScore({ hash: this.$route.params.hash })
   },
 

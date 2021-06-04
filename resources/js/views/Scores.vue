@@ -95,7 +95,7 @@
 
       <button
         class="btn btn-default flex items-center mt-4"
-        @click="createScore"
+        @click="handleCreateScore"
       >
         <PlusIcon
           class="mr-1"

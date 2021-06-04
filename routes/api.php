@@ -44,7 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('scores')->group(function () {
         Route::get('', [ScoreController::class, 'index'])->name('api.scores.index');
-        Route::post('', [ScoreController::class, 'store'])->name('api.scores.store');
+        Route::post('', [ScoreController::class, 'create'])->name('api.scores.create');
     });
 
     Route::prefix('scores/{score:hash}')->group(function () {

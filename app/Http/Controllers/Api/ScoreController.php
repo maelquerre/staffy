@@ -8,6 +8,7 @@ use App\Models\Score;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ScoreController extends Controller
 {
@@ -28,6 +29,24 @@ class ScoreController extends Controller
     public function show(Score $score)
     {
         return new ScoreResource($score);
+    }
+
+    public function create(Request $request, Authenticatable $user)
+    {
+        $validated = $request->validate([
+            'title' => 'string',
+        ]);
+
+        $score = Score::create([
+            'user_id' => $user->id,
+            'hash'    => Str::random(config('staffy.score_hash_size')),
+            'title'   => $validated['title'] ?? 'Untitled',
+            'content' => "X:1\n",
+        ]);
+
+        return ($this->show($score))
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**

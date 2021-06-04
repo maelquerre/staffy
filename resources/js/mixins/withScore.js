@@ -8,19 +8,24 @@ export default {
   },
 
   methods: {
-    ...mapActions('score', {
-      newScore: 'newScore',
+    ...mapActions({
+      createScore: 'score/createScore',
+      toast: 'alerts/toast',
     }),
 
-    createScore() {
-      this.newScore().then(() => {
-        this.$router.push({
-          name: 'score',
-          params: {
-            hash: this.score.hash
-          }
+    handleCreateScore() {
+      this.createScore()
+        .then(() => {
+          this.$router.push({
+            name: 'score',
+            params: {
+              hash: this.score.hash
+            }
+          })
         })
-      })
+        .catch(() => {
+          this.toast({ message: 'There was an error creating your score. Please try again later.' })
+        })
     },
   }
 }

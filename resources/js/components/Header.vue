@@ -15,7 +15,7 @@
         <button
           class="btn btn-text p-1"
           title="New score"
-          @click="createScore"
+          @click="handleCreateScore"
         >
           <PlusIcon
             size="18"
