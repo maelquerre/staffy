@@ -1,4 +1,5 @@
 import api from '../../service/api'
+import axios from 'axios'
 
 const state = {
   user: null,
